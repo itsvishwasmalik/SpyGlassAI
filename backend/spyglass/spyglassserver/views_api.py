@@ -39,8 +39,8 @@ def get_research_paper_details(request):
     if not pdf_url:
         return JsonResponse({"error": "pdf_url parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
     
-    # pdfFileName = request.GET.get("pdfFileName")
-    pdfFileName = "k.pdf"
+    pdfFileName = request.GET.get("filename")
+    # pdfFileName = "k.pdf"
     pdf_path = os.path.join(settings.BASE_DIR, "Data", "research_paper")
     pdf_path = os.path.join(pdf_path, pdfFileName)
     
@@ -51,7 +51,7 @@ def get_research_paper_details(request):
         download_pdf_from_s3(pdf_url, pdf_path)
         
     doi = vpa.get_doi_from_pdf(pdf_path)
-    doi = "10.1080/15376494.2021.2014002"
+    # doi = "10.1080/15376494.2021.2014002"
     research_paper_details = get_research_paper_details_from_doi(doi)
     if research_paper_details:
         return JsonResponse({"research_paper_details": research_paper_details})

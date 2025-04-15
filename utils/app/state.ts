@@ -60,6 +60,11 @@ export const fileState = atom<File[]>({
   default: [],
 });
 
+export const selectedFileState = atom<File|null>({
+  key: "selectedFile",
+  default: null
+});
+
 //  USER STATE
 type User = {
   name: string | null | undefined;
