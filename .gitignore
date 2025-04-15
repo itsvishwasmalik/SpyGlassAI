@@ -39,3 +39,9 @@ next-env.d.ts
 .idea
 
 .env
+
+backend/spyglass/spyglassserver/scopus
+
+*.pyc
+
+backend/spyglass/Data

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,6 +77,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'spyglass.wsgi.application'
 
+MONGOENGINE_DATABASE = "SpyglassAI"
+MONGOENGINE_HOST = (
+    "mongodb+srv://"
+    f"{os.getenv('MONGO_USERNAME', 'whitedevil')}:"
+    f"{os.getenv('MONGO_PASSWORD', 'devil@123')}"
+    f"@cluster0.abcdefg.mongodb.net/SpyglassAI?retryWrites=true&w=majority"
+)
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -87,6 +94,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'your_db_name',  # Replace with your database name
+#         'CLIENT': {
+#             'host': 'mongodb+srv://whitedevil:<password>@cluster0.abcdefg.mongodb.net/your_db_name?retryWrites=true&w=majority',
+#         }
+#     }
+# }
 
 
 # Password validation

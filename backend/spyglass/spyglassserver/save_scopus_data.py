@@ -1,0 +1,208 @@
+'''
+    {"eid": "2-s2.0-85089074315", "doi": "10.1007/s00161-020-00905-0", "pii": null, "pubmed_id": null, "title": "A peridynamic-based machine learning model for one-dimensional and two-dimensional structures", "subtype": "ar", "subtypeDescription": "Article", "creator": "Nguyen C.T.", "afid": null, "affilname": "University of Strathclyde", "affiliation_city": "Glasgow", "affiliation_country": "United Kingdom", "author_count": null, "author_names": null, "author_ids": null, "author_afids": null, "coverDate": "2023-05-01", "coverDisplayDate": "May 2023", "publicationName": "Continuum Mechanics and Thermodynamics", "issn": "09351175", "source_id": "13712", "eIssn": "14320959", "aggregationType": "Journal", "volume": "35", "issueIdentifier": "3", "article_number": null, "pageRange": "741-773", "description": null, "authkeywords": null, "citedby_count": 6, "openaccess": 1, "freetoread": "repositoryam", "freetoreadLabel": "Green", "fund_acr": null, "fund_no": null, "fund_sponsor": null, "ref_docs": [{"doi": "10.1016/S0022-5096(99)00029-0", "title": "Reformulation of elasticity theory for discontinuities and long-range forces", "id": "0346055020", "sourcetitle": "Journal of the Mechanics and Physics of Solids"}, {"doi": "10.1007/s10659-007-9125-1", "title": "Peridynamic states and constitutive modeling", "id": "34547839624", "sourcetitle": "Journal of Elasticity"}, {"doi": "10.1016/j.compstruc.2004.11.026", "title": "A meshfree method based on the peridynamic model of solid mechanics", "id": "17744377618", "sourcetitle": "Computers and Structures"}, {"doi": "10.1016/S0065-2156(10)44002-8", "title": "Peridynamic Theory of Solid Mechanics", "id": "77956895495", "sourcetitle": "Advances in Applied Mechanics"}, {"doi": "10.1007/978-1-4614-8465-3", "title": "Peridynamic theory and its applications", "id": "84929669426", "sourcetitle": "Peridynamic Theory and Its Applications"}, {"doi": "10.1002/nme.2725", "title": "Viscoplasticity using peridynamics", "id": "74949139199", "sourcetitle": "International Journal for Numerical Methods in Engineering"}, {"doi": null, "title": "A non-local, ordinary-state-based viscoelasticity model for peridynamics", "id": "84887271181", "sourcetitle": "Sandia Natl. Lab. Rep."}, {"doi": "10.1016/j.jmps.2015.09.016", "title": "Ordinary state-based peridynamics for plastic deformation according to von Mises yield criteria with isotropic hardening", "id": "84945567327", "sourcetitle": "Journal of the Mechanics and Physics of Solids"}, {"doi": "10.1007/s00161-019-00849-0", "title": "Peridynamic model for visco-hyperelastic material deformation in different strain rates", "id": "85075343057", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1007/s00161-018-0671-5", "title": "Quasistatic elastoplasticity via Peridynamics: existence and localization", "id": "85051427686", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": null, "title": null, "id": "80053974468", "sourcetitle": "Peridynamic theory for modeling three-dimensional damage growth in metallic and composite structures"}, {"doi": "10.1016/j.compstruct.2011.07.019", "title": "Combined finite element and peridynamic analyses for predicting failure in a stiffened composite curved panel with a central slot", "id": "84855197724", "sourcetitle": "Composite Structures"}, {"doi": "10.1016/j.cma.2012.01.016", "title": "Peridynamic model for dynamic fracture in unidirectional fiber-reinforced composites", "id": "84857411687", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1016/j.compstruct.2015.05.079", "title": "Peridynamic modeling of delamination growth in composite laminates", "id": "84935016476", "sourcetitle": "Composite Structures"}, {"doi": "10.1016/j.compstruct.2018.09.034", "title": "Fully coupled thermomechanical analysis of laminated composites by using ordinary state based peridynamic theory", "id": "85054035709", "sourcetitle": "Composite Structures"}, {"doi": "10.1115/1.4033634", "title": "Peridynamic modeling of granular fracture in polycrystalline materials", "id": "84977660156", "sourcetitle": "Journal of Engineering Materials and Technology, Transactions of the ASME"}, {"doi": "10.1016/j.enggeo.2017.02.001", "title": "Fully coupled poroelastic peridynamic formulation for fluid-filled fractures", "id": "85012884294", "sourcetitle": "Engineering Geology"}, {"doi": null, "title": null, "id": "84995407195", "sourcetitle": "Peridynamics for the solution of multiphysics problems."}, {"doi": "10.1007/s00161-018-0691-1", "title": "Ordinary state-based peridynamic modelling for fully coupled thermoelastic problems", "id": "85049657376", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1016/j.engfracmech.2019.106750", "title": "Ordinary state-based peridynamic model for geometrically nonlinear analysis", "id": "85076019710", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.1007/s00161-019-00830-x", "title": "Topology optimization of cracked structures using peridynamics", "id": "85074226658", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1088/1742-6596/125/1/012078", "title": "Peridynamics for multiscale materials modeling", "id": "65649093300", "sourcetitle": "Journal of Physics: Conference Series"}, {"doi": "10.1615/IntJMultCompEng.2011002793", "title": "Adaptive refinement and multiscale modeling in 2D peridynamics", "id": "84255191733", "sourcetitle": "International Journal for Multiscale Computational Engineering"}, {"doi": "10.1016/j.oceaneng.2018.12.047", "title": "Peridynamics formulation for beam structures to predict damage in offshore structures", "id": "85060053307", "sourcetitle": "Ocean Engineering"}, {"doi": "10.1016/j.ijsolstr.2014.05.014", "title": "Peridynamic beams: A non-ordinary, state-based model", "id": "84904254841", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1177/1081286517728424", "title": "An Euler\u2013Bernoulli beam formulation in an ordinary state-based peridynamic framework", "id": "85044577779", "sourcetitle": "Mathematics and Mechanics of Solids"}, {"doi": "10.1016/j.ijsolstr.2015.04.040", "title": "Peridynamics for bending of beams and plates with transverse shear deformation", "id": "84931473483", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1016/j.ijsolstr.2014.09.003", "title": "Peridynamic plates and flat shells: A non-ordinary, state-based model", "id": "84923124378", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1007/s00161-018-0684-0", "title": "Implementation of peridynamic beam and plate formulations in finite element framework", "id": "85048368563", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1016/j.ijsolstr.2016.01.019", "title": "A peridynamic theory for linear elastic shells", "id": "84959898295", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1016/j.engfracmech.2019.106623", "title": "Peridynamics for the thermomechanical behavior of shell structures", "id": "85070801011", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.1016/j.oceaneng.2020.107472", "title": "Investigating the effect of brittle crack propagation on the strength of ship structures by using peridynamics", "id": "85085183037", "sourcetitle": "Ocean Engineering"}, {"doi": "10.1016/j.cma.2016.02.028", "title": "Peridynamic differential operator and its applications", "id": "84960943803", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1007/978-3-030-02647-9", "title": "Peridynamic differential operator for numerical analysis", "id": "85141315046", "sourcetitle": "Peridynamic Differential Operator for Numerical Analysis"}, {"doi": "10.1016/j.cma.2019.01.032", "title": "Peridynamic least squares minimization", "id": "85062010560", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1002/num.22167", "title": "Numerical solution of linear and nonlinear partial differential equations using the peridynamic differential operator", "id": "85020086121", "sourcetitle": "Numerical Methods for Partial Differential Equations"}, {"doi": "10.2140/jomms.2010.5.707", "title": "Coupling of peridynamic theory and the finite element method", "id": "78650237138", "sourcetitle": "Journal of Mechanics of Materials and Structures"}, {"doi": "10.1016/j.cma.2012.07.006", "title": "A coupling approach of discretized peridynamics with finite element method", "id": "84866902275", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1016/j.cma.2017.11.022", "title": "A coupling approach of state-based peridynamics with node-based smoothed finite element method", "id": "85039758909", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1016/j.ijimpeng.2015.08.006", "title": "A hybrid peridynamics-SPH simulation of soil fragmentation by blast loads of buried explosive", "id": "84954387936", "sourcetitle": "International Journal of Impact Engineering"}, {"doi": "10.1016/j.cma.2017.01.026", "title": "A Peridynamics-SPH modeling and simulation of blast fragmentation of soil under buried explosive loads", "id": "85013167800", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": null, "title": null, "id": "85156140957", "sourcetitle": "A fluid-structure interaction model based on peridynamics and Navier\u2013Stokes equations for hydraulic fracture problems"}, {"doi": null, "title": "Peridynamics review", "id": "85072533647", "sourcetitle": "Math. Mech. Solids"}, {"doi": null, "title": "ImageNet classification with deep convolutional neural networks", "id": "84876231242", "sourcetitle": "Advances in Neural Information Processing Systems"}, {"doi": "10.1038/nature14539", "title": "Deep learning", "id": "84930630277", "sourcetitle": "Nature"}, {"doi": "10.1126/science.aab3050", "title": "Human-level concept learning through probabilistic program induction", "id": "84949683101", "sourcetitle": "Science"}, {"doi": "10.1038/nbt.3300", "title": "Predicting the sequence specificities of DNA- and RNA-binding proteins by deep learning", "id": "84938888109", "sourcetitle": "Nature Biotechnology"}, {"doi": null, "title": "ZenRobotics recycler\u2013robotic sorting using machine learning", "id": "85006353217", "sourcetitle": "Proceedings of the International Conference on Sensor-Based Sorting (SBS)"}, {"doi": "10.1017/jfm.2016.803", "title": "Deep learning in fluid dynamics", "id": "85011305672", "sourcetitle": "Journal of Fluid Mechanics"}, {"doi": "10.1148/radiol.2018171291", "title": "Coronary CT angiography\u2013derived fractional flow reserve: Machine learning algorithm versus computational fluid dynamics modeling", "id": "85049357028", "sourcetitle": "Radiology"}, {"doi": "10.1002/9781118443118", "title": "Structural Health Monitoring: A Machine Learning Perspective", "id": "84891585130", "sourcetitle": "Structural Health Monitoring: A Machine Learning Perspective"}, {"doi": "10.1016/j.cirp.2017.04.038", "title": "Toward a Digital Twin for real-time geometry assurance in individualized production", "id": "85018779245", "sourcetitle": "CIRP Annals - Manufacturing Technology"}, {"doi": "10.1016/j.engfracmech.2019.106567", "title": "Fast evaluation of crack growth path using time series forecasting", "id": "85073644181", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.1016/j.compstruc.2008.12.003", "title": "Neural networks as material models within a multiscale approach", "id": "69249246988", "sourcetitle": "Computers and Structures"}, {"doi": "10.1007/s42102-019-00013-x", "title": "Peri-Net: Analysis of Crack Patterns Using Deep Neural Networks", "id": "85089070598", "sourcetitle": "Journal of Peridynamics and Nonlocal Modeling"}, {"doi": null, "title": null, "id": "85046637276", "sourcetitle": "Physics Informed Deep Learning (Part I): Data-Driven Solutions of Nonlinear Partial Differential Equations"}, {"doi": null, "title": null, "id": "0003463572", "sourcetitle": "Introduction to Linear Regression Analysis"}, {"doi": null, "title": null, "id": "25644459607", "sourcetitle": "Introduction to Machine Learning"}, {"doi": null, "title": null, "id": "85045103130", "sourcetitle": "Peridynamics and Its Applications in Marine Structures"}, {"doi": null, "title": "DYNAMIC RELAXATION.", "id": "0020862459", "sourcetitle": "Comput Methods for Transient Anal"}, {"doi": "10.1016/j.tafmec.2010.08.001", "title": "An adaptive dynamic relaxation method for quasi-static simulations using the peridynamic theory", "id": "77956345246", "sourcetitle": "Theoretical and Applied Fracture Mechanics"}, {"doi": "10.1016/j.engfracmech.2017.02.011", "title": "Ordinary state-based peridynamics for thermoviscoelastic deformation", "id": "85013768254", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.2140/jomms.2015.10.167", "title": "Peridynamics for antiplane shear and torsional deformations", "id": "84940509211", "sourcetitle": "Journal of Mechanics of Materials and Structures"}, {"doi": "10.1016/j.marstruc.2004.03.004", "title": "Experimental and numerical modelling of ductile crack propagation in large-scale shell structures", "id": "2642585530", "sourcetitle": "Marine Structures"}, {"doi": "10.1023/a:1007647800529", "title": "Modes of dynamic shear failure in solids", "id": "0033708577", "sourcetitle": "International Journal of Fracture"}, {"doi": "10.1007/BF00033002", "title": "Mixed-mode fracture of concrete", "id": "0024091584", "sourcetitle": "International Journal of Fracture"}, {"doi": null, "title": "Failure mode transition at high rates of shear loading: DGM", "id": "0000437550", "sourcetitle": "Impact Load. Dyn. Behav. Mater."}, {"doi": null, "title": "Shadow optical analysis of dynamic shear fracture", "id": "0012971061", "sourcetitle": "Opt. Eng."}, {"doi": "10.1016/j.cma.2012.01.008", "title": "A phase-field description of dynamic brittle fracture", "id": "84856768710", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}]}
+    
+    I want to store this information in database
+
+class ResearchPaper(models.Model):
+    eid = models.CharField(max_length=255, unique=True)
+    doi = models.CharField(max_length=255, null=True, blank=True)
+    pii = models.CharField(max_length=255, null=True, blank=True)
+    pubmed_id = models.CharField(max_length=255, null=True, blank=True)
+    title = models.TextField(null=True, blank=True)
+    subtype = models.CharField(max_length=50, null=True, blank=True)
+    subtypeDescription = models.CharField(max_length=50, null=True, blank=True)
+    creator = models.CharField(max_length=255, null=True, blank=True)
+    afid = models.CharField(max_length=255, null=True, blank=True)
+    affilname = models.CharField(max_length=255, null=True, blank=True)
+    affiliation_city = models.CharField(max_length=255, null=True, blank=True)
+    affiliation_country = models.CharField(max_length=255, null=True, blank=True)
+    author_count = models.IntegerField(null=True, blank=True)
+    author_names = models.TextField(null=True, blank=True)
+    author_ids = models.TextField(null=True, blank=True)
+    author_afids = models.TextField(null=True, blank=True)
+    coverDate = models.DateField(null=True, blank=True)
+    coverDisplayDate = models.CharField(max_length=50, null=True, blank=True)
+    publicationName = models.CharField(max_length=255, null=True, blank=True)
+    issn = models.CharField(max_length=20, null=True, blank=True)
+    source_id = models.CharField(max_length=20, null=True, blank=True)
+    eIssn = models.CharField(max_length=20, null=True, blank=True)
+    aggregationType = models.CharField(max_length=50, null=True, blank=True)
+    volume = models.CharField(max_length=20, null=True, blank=True)
+    issueIdentifier = models.CharField(max_length=20, null=True, blank=True)
+    article_number = models.CharField(max_length=50, null=True, blank=True)
+    pageRange = models.CharField(max_length=50, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    authkeywords = models.TextField(null=True, blank=True)
+    citedby_count = models.IntegerField(null=True, blank=True)
+    openaccess = models.BooleanField(default=False)
+    freetoread = models.CharField(max_length=50, null=True, blank=True)
+    freetoreadLabel = models.CharField(max_length=50, null=True, blank=True)
+    fund_acr = models.TextField(null=True, blank=True)
+    fund_no = models.TextField(null=True, blank=True)
+    fund_sponsor = models.TextField(null=True, blank=True)
+    ref_docs = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+        I want to write a python script which is used to save the data from json files present in the folders 2023, 2022,... present in folder spyglassserver/scopus/output/2023/2-s2.0-85089074315.json
+
+these json files contains data like
+
+{"eid": "2-s2.0-85089074315", "doi": "10.1007/s00161-020-00905-0", "pii": null, "pubmed_id": null, "title": "A peridynamic-based machine learning model for one-dimensional and two-dimensional structures", "subtype": "ar", "subtypeDescription": "Article", "creator": "Nguyen C.T.", "afid": null, "affilname": "University of Strathclyde", "affiliation_city": "Glasgow", "affiliation_country": "United Kingdom", "author_count": null, "author_names": null, "author_ids": null, "author_afids": null, "coverDate": "2023-05-01", "coverDisplayDate": "May 2023", "publicationName": "Continuum Mechanics and Thermodynamics", "issn": "09351175", "source_id": "13712", "eIssn": "14320959", "aggregationType": "Journal", "volume": "35", "issueIdentifier": "3", "article_number": null, "pageRange": "741-773", "description": null, "authkeywords": null, "citedby_count": 6, "openaccess": 1, "freetoread": "repositoryam", "freetoreadLabel": "Green", "fund_acr": null, "fund_no": null, "fund_sponsor": null, "ref_docs": [{"doi": "10.1016/S0022-5096(99)00029-0", "title": "Reformulation of elasticity theory for discontinuities and long-range forces", "id": "0346055020", "sourcetitle": "Journal of the Mechanics and Physics of Solids"}, {"doi": "10.1007/s10659-007-9125-1", "title": "Peridynamic states and constitutive modeling", "id": "34547839624", "sourcetitle": "Journal of Elasticity"}, {"doi": "10.1016/j.compstruc.2004.11.026", "title": "A meshfree method based on the peridynamic model of solid mechanics", "id": "17744377618", "sourcetitle": "Computers and Structures"}, {"doi": "10.1016/S0065-2156(10)44002-8", "title": "Peridynamic Theory of Solid Mechanics", "id": "77956895495", "sourcetitle": "Advances in Applied Mechanics"}, {"doi": "10.1007/978-1-4614-8465-3", "title": "Peridynamic theory and its applications", "id": "84929669426", "sourcetitle": "Peridynamic Theory and Its Applications"}, {"doi": "10.1002/nme.2725", "title": "Viscoplasticity using peridynamics", "id": "74949139199", "sourcetitle": "International Journal for Numerical Methods in Engineering"}, {"doi": null, "title": "A non-local, ordinary-state-based viscoelasticity model for peridynamics", "id": "84887271181", "sourcetitle": "Sandia Natl. Lab. Rep."}, {"doi": "10.1016/j.jmps.2015.09.016", "title": "Ordinary state-based peridynamics for plastic deformation according to von Mises yield criteria with isotropic hardening", "id": "84945567327", "sourcetitle": "Journal of the Mechanics and Physics of Solids"}, {"doi": "10.1007/s00161-019-00849-0", "title": "Peridynamic model for visco-hyperelastic material deformation in different strain rates", "id": "85075343057", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1007/s00161-018-0671-5", "title": "Quasistatic elastoplasticity via Peridynamics: existence and localization", "id": "85051427686", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": null, "title": null, "id": "80053974468", "sourcetitle": "Peridynamic theory for modeling three-dimensional damage growth in metallic and composite structures"}, {"doi": "10.1016/j.compstruct.2011.07.019", "title": "Combined finite element and peridynamic analyses for predicting failure in a stiffened composite curved panel with a central slot", "id": "84855197724", "sourcetitle": "Composite Structures"}, {"doi": "10.1016/j.cma.2012.01.016", "title": "Peridynamic model for dynamic fracture in unidirectional fiber-reinforced composites", "id": "84857411687", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1016/j.compstruct.2015.05.079", "title": "Peridynamic modeling of delamination growth in composite laminates", "id": "84935016476", "sourcetitle": "Composite Structures"}, {"doi": "10.1016/j.compstruct.2018.09.034", "title": "Fully coupled thermomechanical analysis of laminated composites by using ordinary state based peridynamic theory", "id": "85054035709", "sourcetitle": "Composite Structures"}, {"doi": "10.1115/1.4033634", "title": "Peridynamic modeling of granular fracture in polycrystalline materials", "id": "84977660156", "sourcetitle": "Journal of Engineering Materials and Technology, Transactions of the ASME"}, {"doi": "10.1016/j.enggeo.2017.02.001", "title": "Fully coupled poroelastic peridynamic formulation for fluid-filled fractures", "id": "85012884294", "sourcetitle": "Engineering Geology"}, {"doi": null, "title": null, "id": "84995407195", "sourcetitle": "Peridynamics for the solution of multiphysics problems."}, {"doi": "10.1007/s00161-018-0691-1", "title": "Ordinary state-based peridynamic modelling for fully coupled thermoelastic problems", "id": "85049657376", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1016/j.engfracmech.2019.106750", "title": "Ordinary state-based peridynamic model for geometrically nonlinear analysis", "id": "85076019710", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.1007/s00161-019-00830-x", "title": "Topology optimization of cracked structures using peridynamics", "id": "85074226658", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1088/1742-6596/125/1/012078", "title": "Peridynamics for multiscale materials modeling", "id": "65649093300", "sourcetitle": "Journal of Physics: Conference Series"}, {"doi": "10.1615/IntJMultCompEng.2011002793", "title": "Adaptive refinement and multiscale modeling in 2D peridynamics", "id": "84255191733", "sourcetitle": "International Journal for Multiscale Computational Engineering"}, {"doi": "10.1016/j.oceaneng.2018.12.047", "title": "Peridynamics formulation for beam structures to predict damage in offshore structures", "id": "85060053307", "sourcetitle": "Ocean Engineering"}, {"doi": "10.1016/j.ijsolstr.2014.05.014", "title": "Peridynamic beams: A non-ordinary, state-based model", "id": "84904254841", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1177/1081286517728424", "title": "An Euler\u2013Bernoulli beam formulation in an ordinary state-based peridynamic framework", "id": "85044577779", "sourcetitle": "Mathematics and Mechanics of Solids"}, {"doi": "10.1016/j.ijsolstr.2015.04.040", "title": "Peridynamics for bending of beams and plates with transverse shear deformation", "id": "84931473483", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1016/j.ijsolstr.2014.09.003", "title": "Peridynamic plates and flat shells: A non-ordinary, state-based model", "id": "84923124378", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1007/s00161-018-0684-0", "title": "Implementation of peridynamic beam and plate formulations in finite element framework", "id": "85048368563", "sourcetitle": "Continuum Mechanics and Thermodynamics"}, {"doi": "10.1016/j.ijsolstr.2016.01.019", "title": "A peridynamic theory for linear elastic shells", "id": "84959898295", "sourcetitle": "International Journal of Solids and Structures"}, {"doi": "10.1016/j.engfracmech.2019.106623", "title": "Peridynamics for the thermomechanical behavior of shell structures", "id": "85070801011", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.1016/j.oceaneng.2020.107472", "title": "Investigating the effect of brittle crack propagation on the strength of ship structures by using peridynamics", "id": "85085183037", "sourcetitle": "Ocean Engineering"}, {"doi": "10.1016/j.cma.2016.02.028", "title": "Peridynamic differential operator and its applications", "id": "84960943803", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1007/978-3-030-02647-9", "title": "Peridynamic differential operator for numerical analysis", "id": "85141315046", "sourcetitle": "Peridynamic Differential Operator for Numerical Analysis"}, {"doi": "10.1016/j.cma.2019.01.032", "title": "Peridynamic least squares minimization", "id": "85062010560", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1002/num.22167", "title": "Numerical solution of linear and nonlinear partial differential equations using the peridynamic differential operator", "id": "85020086121", "sourcetitle": "Numerical Methods for Partial Differential Equations"}, {"doi": "10.2140/jomms.2010.5.707", "title": "Coupling of peridynamic theory and the finite element method", "id": "78650237138", "sourcetitle": "Journal of Mechanics of Materials and Structures"}, {"doi": "10.1016/j.cma.2012.07.006", "title": "A coupling approach of discretized peridynamics with finite element method", "id": "84866902275", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1016/j.cma.2017.11.022", "title": "A coupling approach of state-based peridynamics with node-based smoothed finite element method", "id": "85039758909", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": "10.1016/j.ijimpeng.2015.08.006", "title": "A hybrid peridynamics-SPH simulation of soil fragmentation by blast loads of buried explosive", "id": "84954387936", "sourcetitle": "International Journal of Impact Engineering"}, {"doi": "10.1016/j.cma.2017.01.026", "title": "A Peridynamics-SPH modeling and simulation of blast fragmentation of soil under buried explosive loads", "id": "85013167800", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}, {"doi": null, "title": null, "id": "85156140957", "sourcetitle": "A fluid-structure interaction model based on peridynamics and Navier\u2013Stokes equations for hydraulic fracture problems"}, {"doi": null, "title": "Peridynamics review", "id": "85072533647", "sourcetitle": "Math. Mech. Solids"}, {"doi": null, "title": "ImageNet classification with deep convolutional neural networks", "id": "84876231242", "sourcetitle": "Advances in Neural Information Processing Systems"}, {"doi": "10.1038/nature14539", "title": "Deep learning", "id": "84930630277", "sourcetitle": "Nature"}, {"doi": "10.1126/science.aab3050", "title": "Human-level concept learning through probabilistic program induction", "id": "84949683101", "sourcetitle": "Science"}, {"doi": "10.1038/nbt.3300", "title": "Predicting the sequence specificities of DNA- and RNA-binding proteins by deep learning", "id": "84938888109", "sourcetitle": "Nature Biotechnology"}, {"doi": null, "title": "ZenRobotics recycler\u2013robotic sorting using machine learning", "id": "85006353217", "sourcetitle": "Proceedings of the International Conference on Sensor-Based Sorting (SBS)"}, {"doi": "10.1017/jfm.2016.803", "title": "Deep learning in fluid dynamics", "id": "85011305672", "sourcetitle": "Journal of Fluid Mechanics"}, {"doi": "10.1148/radiol.2018171291", "title": "Coronary CT angiography\u2013derived fractional flow reserve: Machine learning algorithm versus computational fluid dynamics modeling", "id": "85049357028", "sourcetitle": "Radiology"}, {"doi": "10.1002/9781118443118", "title": "Structural Health Monitoring: A Machine Learning Perspective", "id": "84891585130", "sourcetitle": "Structural Health Monitoring: A Machine Learning Perspective"}, {"doi": "10.1016/j.cirp.2017.04.038", "title": "Toward a Digital Twin for real-time geometry assurance in individualized production", "id": "85018779245", "sourcetitle": "CIRP Annals - Manufacturing Technology"}, {"doi": "10.1016/j.engfracmech.2019.106567", "title": "Fast evaluation of crack growth path using time series forecasting", "id": "85073644181", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.1016/j.compstruc.2008.12.003", "title": "Neural networks as material models within a multiscale approach", "id": "69249246988", "sourcetitle": "Computers and Structures"}, {"doi": "10.1007/s42102-019-00013-x", "title": "Peri-Net: Analysis of Crack Patterns Using Deep Neural Networks", "id": "85089070598", "sourcetitle": "Journal of Peridynamics and Nonlocal Modeling"}, {"doi": null, "title": null, "id": "85046637276", "sourcetitle": "Physics Informed Deep Learning (Part I): Data-Driven Solutions of Nonlinear Partial Differential Equations"}, {"doi": null, "title": null, "id": "0003463572", "sourcetitle": "Introduction to Linear Regression Analysis"}, {"doi": null, "title": null, "id": "25644459607", "sourcetitle": "Introduction to Machine Learning"}, {"doi": null, "title": null, "id": "85045103130", "sourcetitle": "Peridynamics and Its Applications in Marine Structures"}, {"doi": null, "title": "DYNAMIC RELAXATION.", "id": "0020862459", "sourcetitle": "Comput Methods for Transient Anal"}, {"doi": "10.1016/j.tafmec.2010.08.001", "title": "An adaptive dynamic relaxation method for quasi-static simulations using the peridynamic theory", "id": "77956345246", "sourcetitle": "Theoretical and Applied Fracture Mechanics"}, {"doi": "10.1016/j.engfracmech.2017.02.011", "title": "Ordinary state-based peridynamics for thermoviscoelastic deformation", "id": "85013768254", "sourcetitle": "Engineering Fracture Mechanics"}, {"doi": "10.2140/jomms.2015.10.167", "title": "Peridynamics for antiplane shear and torsional deformations", "id": "84940509211", "sourcetitle": "Journal of Mechanics of Materials and Structures"}, {"doi": "10.1016/j.marstruc.2004.03.004", "title": "Experimental and numerical modelling of ductile crack propagation in large-scale shell structures", "id": "2642585530", "sourcetitle": "Marine Structures"}, {"doi": "10.1023/a:1007647800529", "title": "Modes of dynamic shear failure in solids", "id": "0033708577", "sourcetitle": "International Journal of Fracture"}, {"doi": "10.1007/BF00033002", "title": "Mixed-mode fracture of concrete", "id": "0024091584", "sourcetitle": "International Journal of Fracture"}, {"doi": null, "title": "Failure mode transition at high rates of shear loading: DGM", "id": "0000437550", "sourcetitle": "Impact Load. Dyn. Behav. Mater."}, {"doi": null, "title": "Shadow optical analysis of dynamic shear fracture", "id": "0012971061", "sourcetitle": "Opt. Eng."}, {"doi": "10.1016/j.cma.2012.01.008", "title": "A phase-field description of dynamic brittle fracture", "id": "84856768710", "sourcetitle": "Computer Methods in Applied Mechanics and Engineering"}]}
+
+I want to dump this data into the database using python script
+    '''
+    
+import os
+import json
+from django.core.management.base import BaseCommand
+from spyglassserver.models import ResearchPaper
+from django.utils import timezone
+from django.db import transaction
+from django.conf import settings
+
+class Command(BaseCommand):
+    # command will accept --year as a parameter
+    help = 'Load JSON data into the database'
+    def add_arguments(self, parser):
+        parser.add_argument('--year', type=int, help='Year of the data to load')
+        
+    def handle(self, *args, **kwargs):
+        year = kwargs['year']
+        if not year:
+            self.stdout.write(self.style.ERROR('Please provide a year using --year argument.'))
+            return
+
+        # Path to the JSON files
+        json_dir = os.path.join(settings.BASE_DIR, 'spyglassserver', 'scopus', 'output', str(year))
+        if not os.path.exists(json_dir):
+            self.stdout.write(self.style.ERROR(f'Directory {json_dir} does not exist.'))
+            return
+
+        # Loop through all JSON files in the directory
+        for filename in os.listdir(json_dir):
+            if filename.endswith('.json'):
+                file_path = os.path.join(json_dir, filename)
+                with open(file_path, 'r') as file:
+                    try:
+                        data = json.load(file)
+                        self.save_data(data)
+                    except json.JSONDecodeError as e:
+                        self.stdout.write(self.style.ERROR(f'Error decoding JSON from {file_path}: {e}'))
+                    except Exception as e:
+                        self.stdout.write(self.style.ERROR(f'Error processing {file_path}: {e}'))
+                    else:
+                        self.stdout.write(self.style.SUCCESS(f'Successfully processed {file_path}'))
+                        
+    def save_data(self, data):
+        # Extract the relevant fields from the JSON data
+        eid = data.get('eid')
+        doi = data.get('doi')
+        pii = data.get('pii')
+        pubmed_id = data.get('pubmed_id')
+        title = data.get('title')
+        subtype = data.get('subtype')
+        subtypeDescription = data.get('subtypeDescription')
+        creator = data.get('creator')
+        afid = data.get('afid')
+        affilname = data.get('affilname')
+        affiliation_city = data.get('affiliation_city')
+        affiliation_country = data.get('affiliation_country')
+        author_count = data.get('author_count')
+        author_names = data.get('author_names')
+        author_ids = data.get('author_ids')
+        author_afids = data.get('author_afids')
+        coverDate = data.get('coverDate')
+        coverDisplayDate = data.get('coverDisplayDate')
+        publicationName = data.get('publicationName')
+        issn = data.get('issn')
+        source_id = data.get('source_id')
+        eIssn = data.get('eIssn')
+        aggregationType = data.get('aggregationType')
+        volume = data.get('volume')
+        issueIdentifier = data.get('issueIdentifier')
+        article_number = data.get('article_number')
+        pageRange = data.get('pageRange')
+        description = data.get('description')
+        authkeywords = data.get('authkeywords')
+        citedby_count = data.get('citedby_count')
+        openaccess = data.get('openaccess')
+        freetoread = data.get('freetoread')
+        freetoreadLabel = data.get('freetoreadLabel')
+        fund_acr = data.get('fund_acr')
+        fund_no = data.get('fund_no')
+        fund_sponsor = data.get('fund_sponsor')
+        ref_docs = data.get('ref_docs')
+        created_at = timezone.now()
+        updated_at = timezone.now()
+        
+        # Save the data to the database
+        with transaction.atomic():
+            research_paper, created = ResearchPaper.objects.update_or_create(
+                eid=eid,
+                defaults={
+                    'doi': doi,
+                    'pii': pii,
+                    'pubmed_id': pubmed_id,
+                    'title': title,
+                    'subtype': subtype,
+                    'subtypeDescription': subtypeDescription,
+                    'creator': creator,
+                    'afid': afid,
+                    'affilname': affilname,
+                    'affiliation_city': affiliation_city,
+                    'affiliation_country': affiliation_country,
+                    'author_count': author_count,
+                    'author_names': author_names,
+                    'author_ids': author_ids,
+                    'author_afids': author_afids,
+                    'coverDate': coverDate,
+                    'coverDisplayDate': coverDisplayDate,
+                    'publicationName': publicationName,
+                    'issn': issn,
+                    'source_id': source_id,
+                    'eIssn': eIssn,
+                    'aggregationType': aggregationType,
+                    'volume': volume,
+                    'issueIdentifier': issueIdentifier,
+                    'article_number': article_number,
+                    'pageRange': pageRange,
+                    'description': description,
+                    'authkeywords': authkeywords,
+                    'citedby_count': citedby_count,
+                    'openaccess': openaccess,
+                    'freetoread': freetoread,
+                    'freetoreadLabel': freetoreadLabel,
+                    'fund_acr': fund_acr,
+                    'fund_no': fund_no,
+                    'fund_sponsor': fund_sponsor,
+                    'ref_docs': json.dumps(ref_docs) if ref_docs else None,
+                    'created_at': created_at,
+                    'updated_at': updated_at,
+                }
+                
+            )   
+            if created:
+                self.stdout.write(self.style.SUCCESS(f'Created new ResearchPaper entry for {eid}'))
+            else:
+                self.stdout.write(self.style.SUCCESS(f'Updated ResearchPaper entry for {eid}'))
+                
+        # Print the saved data for verification
+        self.stdout.write(self.style.SUCCESS(f'Saved ResearchPaper entry: {eid}'))
+        self.stdout.write(self.style.SUCCESS(f'Title: {title}'))
+        self.stdout.write(self.style.SUCCESS(f'DOI: {doi}'))
+        self.stdout.write(self.style.SUCCESS(f'Publication Name: {publicationName}'))
+        self.stdout.write(self.style.SUCCESS(f'Author: {creator}'))
+        self.stdout.write(self.style.SUCCESS(f'Created At: {created_at}'))
+        self.stdout.write(self.style.SUCCESS(f'Updated At: {updated_at}'))
+        self.stdout.write(self.style.SUCCESS('Data saved successfully!'))
+        
+if __name__ == "__main__":
+    import django
+    import os
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'spyglass.settings')
+    django.setup()
+    
+    # Run the command
+    Command().handle(year=2023)
+    

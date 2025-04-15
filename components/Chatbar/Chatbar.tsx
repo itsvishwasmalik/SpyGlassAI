@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { Conversation } from '@/types/chat';
 import { KeyValuePair } from '@/types/data';
 import { SupportedExportFormats } from '@/types/export';
@@ -9,7 +10,7 @@ import { ChatbarSettings } from './ChatbarSettings';
 import { Conversations } from './Conversations';
 import { File, Folder as Directory, Tree } from '../ui/file-tree';
 import { useSetRecoilState, useRecoilState } from "recoil";
-import { cardState, directoryState } from "@/utils/app/state";
+import { cardState, directoryState, selectedFileState } from "@/utils/app/state";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 interface FileInterface {
@@ -89,6 +90,7 @@ export const Chatbar: FC<Props> = ({
   const setCard = useSetRecoilState(cardState);
   const { data: session, status } = useSession();
   const [directory, setDirectory] = useRecoilState(directoryState);
+  const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
 
   const handleUpdateConversation = (
     conversation: Conversation,
@@ -309,7 +311,7 @@ export const Chatbar: FC<Props> = ({
           {t('New Paper')}
         </button>
 
-        <button
+        {/* <button
           className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-[14px] leading-normal text-white transition-colors duration-200 hover:bg-gray-500/10"
           // onClick={() => onCreateFolder(t('New folder'))}
           onClick={() => {
@@ -327,7 +329,7 @@ export const Chatbar: FC<Props> = ({
           }}
         >
           <IconFolderPlus size={18} />
-        </button>
+        </button> */}
       </div>
 
       {conversations.length > 1 && (
@@ -339,32 +341,6 @@ export const Chatbar: FC<Props> = ({
       )}
 
       <div className="flex-grow overflow-auto">
-
-        {conversations.length > 0 ? (
-          <div
-            className="pt-2"
-            onDrop={(e) => handleDrop(e)}
-            onDragOver={allowDrop}
-            onDragEnter={highlightDrop}
-            onDragLeave={removeHighlight}
-          >
-            <Conversations
-              loading={loading}
-              conversations={filteredConversations.filter(
-                (conversation) => !conversation.folderId,
-              )}
-              selectedConversation={selectedConversation}
-              onSelectConversation={onSelectConversation}
-              onDeleteConversation={handleDeleteConversation}
-              onUpdateConversation={handleUpdateConversation}
-            />
-          </div>
-        ) : (
-          <div className="mt-8 flex flex-col items-center gap-3 text-sm leading-normal text-white opacity-50">
-            <IconMessagesOff />
-            {t('No conversations.')}
-          </div>
-        )}
     {directory.length > 0 && <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border bg-[#1e1e1e]">
           <Tree
             className="overflow-hidden rounded-md p-2"
@@ -382,7 +358,7 @@ export const Chatbar: FC<Props> = ({
                 return dateA.getTime() - dateB.getTime();
               })
               .map((folder: FolderInterface, index: number) => (
-                <div onClick={()=>{
+                <div key={index} onClick={()=>{
                   setDirectory((prevDirectory) => [
                     ...prevDirectory,
                     { id: folder.id, name: folder.name },
@@ -402,9 +378,30 @@ export const Chatbar: FC<Props> = ({
                   return dateA.getTime() - dateB.getTime();
                 })
                 .map((file: FileInterface, index: number) => (
+                  <div key={index} onClick={()=>{
+                        /*
+                          export const selectedFileState = atom<File|null>({
+                            key: "selectedFile",
+                            default: null
+                          });
+
+                          set the clicked FIle in selectedFileState
+                        */
+
+                    setSelectedFile({
+                      owner: file.owner,
+                      sharekey: file.sharekey,
+                      filekey: file.filekey,
+                      name: file.name,
+                      createdAt: file.createdAt,
+                      updatedAt: file.updatedAt,
+                      type: file.type,
+                    });
+                  }}>
                   <File value={(index + folders.length).toString()}>
                     <p>{file.name}</p>
                   </File>
+                  </div>
                 ))}
             </Directory>
           </Tree>
