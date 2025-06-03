@@ -3,7 +3,7 @@ import { IconPlus } from '@tabler/icons-react';
 import { FC } from 'react';
 
 interface Props {
-  selectedConversation: Conversation;
+  selectedConversation: Conversation | undefined;
   onNewConversation: () => void;
 }
 
@@ -16,7 +16,7 @@ export const Navbar: FC<Props> = ({
       <div className="mr-4"></div>
 
       <div className="max-w-[240px] overflow-hidden text-ellipsis whitespace-nowrap">
-        {selectedConversation.name}
+        {selectedConversation?.name}
       </div>
 
       <IconPlus

@@ -29,7 +29,7 @@ type Directory = {
   name: string | null | undefined;
 };
 export const directoryState = atom<Directory[]>({
-  key: "directory",
+  key: "recoil_directory",
   default: [],
 });
 
@@ -41,7 +41,7 @@ type Folder = {
   updatedAt: string | null | undefined;
 };
 export const folderState = atom<Folder[]>({
-  key: "folderList",
+  key: "recoil_folderList",
   default: [],
 });
 
@@ -56,12 +56,12 @@ type File = {
   updatedAt: string | null | undefined;
 };
 export const fileState = atom<File[]>({
-  key: "fileList",
+  key: "recoil_fileList",
   default: [],
 });
 
 export const selectedFileState = atom<File|null>({
-  key: "selectedFile",
+  key: "recoil_selectedFile",
   default: null
 });
 
@@ -85,19 +85,19 @@ export const userState = atom<User>({
 
 // MAIN FOLDER STATE
 export const mainFolderState = atom({
-  key: "mainFolder",
+  key: "recoil_mainFolder",
   default: "root",
 });
 
 // FOLDER CREATION STATE
 export const updationState = atom({
-  key: "rootUpdation",
+  key: "recoil_rootUpdation",
   default: false,
 });
 
 // Message State
 export const messageState = atom({
-  key: "message",
+  key: "recoil_message",
   default: {
     open: false,
     text: "",

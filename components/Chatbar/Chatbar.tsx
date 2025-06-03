@@ -52,8 +52,7 @@ interface Props {
   files: File[];
   loading: boolean;
   conversations: Conversation[];
-  selectedConversation: Conversation;
-  apiKey: string;
+  selectedConversation: Conversation | undefined ;
   onNewConversation: () => void;
   onToggleLightMode: (mode: 'light' | 'dark') => void;
   onSelectConversation: (conversation: Conversation) => void;
@@ -62,10 +61,10 @@ interface Props {
     conversation: Conversation,
     data: KeyValuePair,
   ) => void;
-  onApiKeyChange: (apiKey: string) => void;
   onClearConversations: () => void;
   onExportConversations: () => void;
   onImportConversations: (data: SupportedExportFormats) => void;
+  setSelectedConversation?: (c: Conversation | undefined) => void;
 }
 
 export const Chatbar: FC<Props> = ({
@@ -74,23 +73,73 @@ export const Chatbar: FC<Props> = ({
   loading,
   conversations,
   selectedConversation,
-  apiKey,
   onNewConversation,
   onSelectConversation,
   onDeleteConversation,
   onUpdateConversation,
-  onApiKeyChange,
   onClearConversations,
   onExportConversations,
   onImportConversations,
+  setSelectedConversation,
 }) => {
   const { t } = useTranslation('sidebar');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [filteredConversations, setFilteredConversations] = useState<Conversation[]>(conversations);
+  const [filteredConversations, setFilteredConversations] = useState<Conversation[]>([]);
   const setCard = useSetRecoilState(cardState);
   const { data: session, status } = useSession();
   const [directory, setDirectory] = useRecoilState(directoryState);
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
+  const [allConversations, setAllConversations] = useState<Conversation[]>([]);
+
+  // Load all conversations from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem('conversationHistory');
+    if (stored) {
+      try {
+        setAllConversations(JSON.parse(stored));
+      } catch {
+        setAllConversations([]);
+      }
+    } else {
+      setAllConversations([]);
+    }
+  }, []);
+
+  // When selectedFile changes, filter conversations for that file
+  useEffect(() => {
+    if (selectedFile && selectedFile.filekey) {
+      setFilteredConversations(
+        allConversations.filter((c) => c.filekey === selectedFile.filekey)
+      );
+    } else {
+      setFilteredConversations([]);
+    }
+  }, [selectedFile, allConversations]);
+
+  // When conversations change, update localStorage
+  useEffect(() => {
+    localStorage.setItem('conversationHistory', JSON.stringify(allConversations));
+  }, [allConversations]);
+
+  // When a new conversation is created, link it to the selected file
+  const handleNewConversation = () => {
+    if (!selectedFile || !selectedFile.filekey) return;
+    const newConv: Conversation = {
+      id: Date.now().toString(),
+      name: t('New Conversation'),
+      messages: [],
+      folderId: null,
+      filekey: selectedFile.filekey,
+    };
+    setAllConversations((prev) => [...prev, newConv]);
+    setFilteredConversations((prev) => [...prev, newConv]);
+    onSelectConversation(newConv);
+  };
+
+  // Handle selecting a conversation for the selected file
+  const handleSelectConversationWithFile = (conversation: Conversation) => {
+    onSelectConversation(conversation);
+  };
 
   const handleUpdateConversation = (
     conversation: Conversation,
@@ -201,6 +250,66 @@ export const Chatbar: FC<Props> = ({
   }, [searchTerm, conversations]);
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  // When a file is selected, select the most recent conversation for that file
+  const getMessagesKey = (filekey: string | null | undefined) => `conversation_messages_${filekey}`;
+
+  const handleFileSelect = (file: FileInterface) => {
+    setSelectedFile({
+      owner: file.owner,
+      sharekey: file.sharekey,
+      filekey: file.filekey,
+      name: file.name,
+      createdAt: file.createdAt,
+      updatedAt: file.updatedAt,
+      type: file.type,
+    });
+    // Find the most recent conversation for this file
+    let fileConvs = allConversations.filter(c => c.filekey === file.filekey);
+    if (setSelectedConversation) {
+      if (fileConvs.length > 0) {
+        // Fetch messages from localStorage for this conversation
+        const messagesKey = getMessagesKey(file.filekey);
+        let messages = fileConvs[fileConvs.length - 1].messages;
+        const storedMessages = localStorage.getItem(messagesKey);
+        if (storedMessages) {
+          try {
+            messages = JSON.parse(storedMessages);
+          } catch {}
+        }
+        const updatedConv = { ...fileConvs[fileConvs.length - 1], messages };
+        setSelectedConversation(updatedConv);
+      } else {
+        // Create a new conversation for this file
+        const newConv: Conversation = {
+          id: Date.now().toString(),
+          name: file.name || 'New Conversation',
+          messages: [],
+          folderId: null,
+          filekey: file.filekey,
+        };
+        const updatedConvs = [...allConversations, newConv];
+        setAllConversations(updatedConvs);
+        setFilteredConversations([newConv]);
+        setTimeout(() => {
+          setSelectedConversation(newConv);
+        }, 0);
+        localStorage.setItem('conversationHistory', JSON.stringify(updatedConvs));
+        // Also save empty messages for this filekey
+        localStorage.setItem(getMessagesKey(file.filekey), JSON.stringify([]));
+      }
+    }
+  };
+
+  // Save messages to localStorage whenever a conversation's messages change
+  useEffect(() => {
+    if (selectedConversation && selectedConversation.filekey) {
+      localStorage.setItem(
+        getMessagesKey(selectedConversation.filekey),
+        JSON.stringify(selectedConversation.messages)
+      );
+    }
+  }, [selectedConversation?.messages, selectedConversation?.filekey]);
 
   return (
     <div
@@ -341,81 +450,44 @@ export const Chatbar: FC<Props> = ({
       )}
 
       <div className="flex-grow overflow-auto">
-    {directory.length > 0 && <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border bg-[#1e1e1e]">
-          <Tree
-            className="overflow-hidden rounded-md p-2"
-            elements={folders}
-          >
-            <Directory element={directory[directory.length-1].name ?? ''} value="1">
-            {[...folders]
-              .sort((a, b) => {
-                const dateA = a.createdAt
-                  ? new Date(a.createdAt)
-                  : new Date(0);
-                const dateB = b.createdAt
-                  ? new Date(b.createdAt)
-                  : new Date(0);
-                return dateA.getTime() - dateB.getTime();
-              })
-              .map((folder: FolderInterface, index: number) => (
-                <div key={index} onClick={()=>{
-                  setDirectory((prevDirectory) => [
-                    ...prevDirectory,
-                    { id: folder.id, name: folder.name },
-                  ]);
-                }}>
-                  <Directory value={index.toString()} element={folder.name || ''}/>
-                </div>
-              ))}
-            {[...files]
-                .sort((a, b) => {
-                  const dateA = a.createdAt
-                    ? new Date(a.createdAt)
-                    : new Date(0);
-                  const dateB = b.createdAt
-                    ? new Date(b.createdAt)
-                    : new Date(0);
-                  return dateA.getTime() - dateB.getTime();
-                })
-                .map((file: FileInterface, index: number) => (
-                  <div key={index} onClick={()=>{
-                        /*
-                          export const selectedFileState = atom<File|null>({
-                            key: "selectedFile",
-                            default: null
-                          });
-
-                          set the clicked FIle in selectedFileState
-                        */
-
-                    setSelectedFile({
-                      owner: file.owner,
-                      sharekey: file.sharekey,
-                      filekey: file.filekey,
-                      name: file.name,
-                      createdAt: file.createdAt,
-                      updatedAt: file.updatedAt,
-                      type: file.type,
-                    });
-                  }}>
-                  <File value={(index + folders.length).toString()}>
-                    <p>{file.name}</p>
-                  </File>
-                  </div>
-                ))}
-            </Directory>
-          </Tree>
-        </div>}
+        {directory.length > 0 && (
+          <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border bg-[#1e1e1e]">
+            <Tree className="overflow-hidden rounded-md p-2" elements={folders}>
+              <Directory element={directory[directory.length - 1].name ?? ''} value="1">
+                {[...folders]
+                  .sort((a, b) => {
+                    const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+                    const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+                    return dateA.getTime() - dateB.getTime();
+                  })
+                  .map((folder: FolderInterface, index: number) => (
+                    <div key={index} onClick={() => {
+                      setDirectory((prevDirectory) => [
+                        ...prevDirectory,
+                        { id: folder.id, name: folder.name },
+                      ]);
+                    }}>
+                      <Directory value={index.toString()} element={folder.name || ''} />
+                    </div>
+                  ))}
+                {[...files]
+                  .sort((a, b) => {
+                    const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+                    const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+                    return dateA.getTime() - dateB.getTime();
+                  })
+                  .map((file: FileInterface, index: number) => (
+                    <div key={index} onClick={() => handleFileSelect(file)}>
+                      <File value={(index + folders.length).toString()}>
+                        <p>{file.name}</p>
+                      </File>
+                    </div>
+                  ))}
+              </Directory>
+            </Tree>
+          </div>
+        )}
       </div>
-
-      <ChatbarSettings
-        apiKey={apiKey}
-        conversationsCount={conversations.length}
-        onApiKeyChange={onApiKeyChange}
-        onClearConversations={onClearConversations}
-        onExportConversations={onExportConversations}
-        onImportConversations={onImportConversations}
-      />
     </div>
   );
 };

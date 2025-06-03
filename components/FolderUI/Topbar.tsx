@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Breadcrumb from "@/components/FolderUI/Breadcrumb";
 import { useRecoilValue } from "recoil";
-import { cardState, messageState } from "@/utils/app/state";
+import { cardState } from "@/utils/app/state";
 
 export default function Topbar() {
   const { data: session, status } = useSession();

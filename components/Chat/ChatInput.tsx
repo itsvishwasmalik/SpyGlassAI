@@ -24,7 +24,6 @@ import { VariableModal } from './VariableModal';
 
 interface Props {
   messageIsStreaming: boolean;
-  model: OpenAIModel;
   conversationIsEmpty: boolean;
   prompts: Prompt[];
   onSend: (message: Message, plugin: Plugin | null) => void;
@@ -35,7 +34,6 @@ interface Props {
 
 export const ChatInput: FC<Props> = ({
   messageIsStreaming,
-  model,
   conversationIsEmpty,
   prompts,
   onSend,
@@ -63,7 +61,7 @@ export const ChatInput: FC<Props> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    const maxLength = model.maxLength;
+    const maxLength = 1200; // Set your desired max length here
 
     if (value.length > maxLength) {
       alert(

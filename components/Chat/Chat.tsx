@@ -1,7 +1,5 @@
 import { Conversation, Message } from '@/types/chat';
 import { KeyValuePair } from '@/types/data';
-import { ErrorMessage } from '@/types/error';
-import { OpenAIModel, OpenAIModelID } from '@/types/openai';
 import { Prompt } from '@/types/prompt';
 import { throttle } from '@/utils';
 import { IconArrowDown, IconClearAll, IconSettings } from '@tabler/icons-react';
@@ -15,22 +13,13 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Spinner } from '../Global/Spinner';
 import { ChatInput } from './ChatInput';
 import { ChatLoader } from './ChatLoader';
 import { ChatMessage } from './ChatMessage';
-import { ErrorMessageDiv } from './ErrorMessageDiv';
-import { ModelSelect } from './ModelSelect';
-import { SystemPrompt } from './SystemPrompt';
 
 interface Props {
   conversation: Conversation;
-  models: OpenAIModel[];
-  apiKey: string;
-  serverSideApiKeyIsSet: boolean;
-  defaultModelId: OpenAIModelID;
   messageIsStreaming: boolean;
-  modelError: ErrorMessage | null;
   loading: boolean;
   prompts: Prompt[];
   onSend: (
@@ -49,12 +38,7 @@ interface Props {
 export const Chat: FC<Props> = memo(
   ({
     conversation,
-    models,
-    apiKey,
-    serverSideApiKeyIsSet,
-    defaultModelId,
     messageIsStreaming,
-    modelError,
     loading,
     prompts,
     onSend,
@@ -153,15 +137,6 @@ export const Chat: FC<Props> = memo(
 
     return (
       <div className="relative flex-1 overflow-hidden bg-[#1e1e1e]">
-        {!(apiKey || serverSideApiKeyIsSet) ? (
-          <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
-            <div className="text-center text-4xl font-bold text-white">
-              Welcome to Spyglass AI
-            </div>
-          </div>
-        ) : modelError ? (
-          <ErrorMessageDiv error={modelError} />
-        ) : (
           <>
             <div
               className="max-h-full overflow-x-hidden"
@@ -172,50 +147,12 @@ export const Chat: FC<Props> = memo(
                 <>
                   <div className="mx-auto flex w-[350px] flex-col space-y-10 pt-12 sm:w-[600px]">
                     <div className="text-center text-3xl font-semibold text-gray-100">
-                      {models.length === 0 ? (
-                        <div>
-                          <Spinner size="16px" className="mx-auto" />
-                        </div>
-                      ) : (
-                        'Spyglass AI'
-                      )}
+                        Spyglass AI
                     </div>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="flex justify-center border border-b-neutral-600 bg-[#2e2e2e] py-2 text-sm text-neutral-200">
-                    {t('Model')}: {conversation.model.name}
-                    <button
-                      className="ml-2 cursor-pointer hover:opacity-50"
-                      onClick={handleSettings}
-                    >
-                      <IconSettings size={18} />
-                    </button>
-                    <button
-                      className="ml-2 cursor-pointer hover:opacity-50"
-                      onClick={onClearAll}
-                    >
-                      <IconClearAll size={18} />
-                    </button>
-                  </div>
-                  {showSettings && (
-                    <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-                      <div className="flex h-full flex-col space-y-4 border-b border-neutral-600 p-4 md:rounded-lg md:border">
-                        <ModelSelect
-                          model={conversation.model}
-                          models={models}
-                          defaultModelId={defaultModelId}
-                          onModelChange={(model) =>
-                            onUpdateConversation(conversation, {
-                              key: 'model',
-                              value: model,
-                            })
-                          }
-                        />
-                      </div>
-                    </div>
-                  )}
 
                   {conversation.messages.map((message, index) => (
                     <ChatMessage
@@ -241,7 +178,6 @@ export const Chat: FC<Props> = memo(
               textareaRef={textareaRef}
               messageIsStreaming={messageIsStreaming}
               conversationIsEmpty={conversation.messages.length === 0}
-              model={conversation.model}
               prompts={prompts}
               onSend={(message, plugin) => {
                 setCurrentMessage(message);
@@ -254,7 +190,6 @@ export const Chat: FC<Props> = memo(
               }}
             />
           </>
-        )}
         {showScrollDownButton && (
           <div className="absolute bottom-0 right-0 mb-4 mr-4 pb-20">
             <button
