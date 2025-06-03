@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import status
 from django.contrib.auth.models import User
 from spyglassserver import models
-from spyglassserver.views_pdf_analysis import views_pdf_analysis as vpa
+from spyglassserver.views.views_pdf_analysis import views_pdf_analysis as vpa
 from django.conf import settings
 import os
 import requests

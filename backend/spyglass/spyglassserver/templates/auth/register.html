@@ -1,0 +1,176 @@
+{% load static %}
+
+<!doctype html>
+<html data-theme="dark" class="scroll-smooth">
+	<head>
+		<title>Register</title>
+
+		<!-- Tailwind CSS -->
+		<link rel="stylesheet" href="/static/css/tailwind/output.css" />
+
+		<!-- jQuery -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+
+		<script src="/static/js/utils/components.js"></script>
+
+		<script type="module" src="/static/js/config/ajax.js"></script>
+
+		<link rel="shortcut icon" href="/static/favicon.ico" />
+	</head>
+
+	<body class="h-full w-full">
+		{% csrf_token %}
+
+		<div class="absolute top-0 flex justify-center items-center w-full h-full bg-background-paper backdrop-blur">
+			<div class="w-full max-w-md p-4 rounded-md shadow-md sm:p-8 bg-primary-main">
+				<h2 class="mb-3 text-2xl font-semibold text-center text-secondary-main">Sign Up</h2>
+				<p class="text-sm text-center text-gray-400">Enter your credentials to continue</p>
+				<div class="my-6 space-y-4">
+					<button
+						id="linkedin"
+						aria-label="Login with Linkedin"
+						role="button"
+						class="flex items-center justify-center w-full p-2 border rounded-md border-gray-500 hover:border-secondary-main hover:bg-[#ffc1071a]"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
+							<path
+								fill="#0078d4"
+								d="M9,25H4V10h5V25z M6.501,8C5.118,8,4,6.879,4,5.499S5.12,3,6.501,3C7.879,3,9,4.121,9,5.499C9,6.879,7.879,8,6.501,8z M27,25h-4.807v-7.3c0-1.741-0.033-3.98-2.499-3.98c-2.503,0-2.888,1.896-2.888,3.854V25H12V9.989h4.614v2.051h0.065 c0.642-1.18,2.211-2.424,4.551-2.424c4.87,0,5.77,3.109,5.77,7.151C27,16.767,27,25,27,25z"
+							/>
+						</svg>
+						<p class="text-gray-200 ml-2 text-sm">Continue with Linkedin</p>
+					</button>
+				</div>
+				<div class="flex items-center w-full my-4">
+					<hr class="w-full text-gray-400 border-divider-main" />
+					<p class="px-3 text-gray-400">OR</p>
+					<hr class="w-full text-gray-400 border-divider-main" />
+				</div>
+				<h2 class="mb-3 text-center text-gray-200">Sign Up with Email</h2>
+
+				<div class="space-y-8">
+					<div class="flex mt-5 -mb-5">
+						<div class="space-y-2 mr-2">
+							<div class="space-y-2">
+								<div class="relative">
+									<input
+										id="firstName"
+										class="text-white peer block w-full rounded-lg p-4 bg-background-paper text-sm outline-none placeholder:text-transparent autofill:pb-2 border border-transparent autofill:pt-6 focus:border-gray-500 focus:pb-2 focus:pt-6 disabled:pointer-events-none disabled:opacity-50 [&:not(:placeholder-shown)]:pb-2 [&:not(:placeholder-shown)]:pt-6"
+										placeholder="eg. James"
+									/>
+									<label
+										id="firstNameLabel"
+										class="pointer-events-none absolute start-0 top-0 h-full truncate border text-gray-500 border-transparent p-4 text-sm transition duration-100 ease-in-out peer-focus:-translate-y-3 peer-focus:text-[11px] peer-focus:text-gray-500 peer-disabled:pointer-events-none peer-disabled:opacity-50 peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500"
+									>
+										First Name</label
+									>
+									<div id="firstNameText" class="mt-2 text-error-main text-xs ml-3"></div>
+								</div>
+							</div>
+						</div>
+						<div class="space-y-2 ml-2">
+							<div class="relative">
+								<input
+									id="lastName"
+									class="text-white peer block w-full rounded-lg p-4 bg-background-paper text-sm outline-none placeholder:text-transparent autofill:pb-2 border border-transparent autofill:pt-6 focus:border-gray-500 focus:pb-2 focus:pt-6 disabled:pointer-events-none disabled:opacity-50 [&:not(:placeholder-shown)]:pb-2 [&:not(:placeholder-shown)]:pt-6"
+									placeholder="eg. James"
+								/>
+								<label
+									id="lastNameLabel"
+									class="pointer-events-none absolute start-0 top-0 h-full truncate border text-gray-500 border-transparent p-4 text-sm transition duration-100 ease-in-out peer-focus:-translate-y-3 peer-focus:text-[11px] peer-focus:text-gray-500 peer-disabled:pointer-events-none peer-disabled:opacity-50 peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500"
+								>
+									Last Name</label
+								>
+								<div id="lastNameText" class="mt-2 text-error-main text-xs ml-3"></div>
+							</div>
+						</div>
+					</div>
+					<div class="space-y-4">
+						<div class="space-y-2">
+							<div class="relative">
+								<input
+									id="email"
+									type="email"
+									class="text-white peer block w-full rounded-lg p-4 bg-background-paper text-sm outline-none placeholder:text-transparent autofill:pb-2 border border-transparent autofill:pt-6 focus:border-gray-500 focus:pb-2 focus:pt-6 disabled:pointer-events-none disabled:opacity-50 [&:not(:placeholder-shown)]:pb-2 [&:not(:placeholder-shown)]:pt-6"
+									placeholder="you@email.com"
+								/>
+								<label
+									id="emailLabel"
+									class="pointer-events-none absolute start-0 top-0 h-full truncate border text-gray-500 border-transparent p-4 text-sm transition duration-100 ease-in-out peer-focus:-translate-y-3 peer-focus:text-[11px] peer-focus:text-gray-500 peer-disabled:pointer-events-none peer-disabled:opacity-50 peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500"
+									>Email</label
+								>
+								<div id="emailText" class="mt-2 text-error-main text-xs ml-3"></div>
+							</div>
+						</div>
+						<div class="space-y-2">
+							<div class="relative">
+								<input
+									id="password"
+									type="password"
+									class="text-white peer block w-full rounded-lg p-4 bg-background-paper text-sm outline-none placeholder:text-transparent autofill:pb-2 border border-transparent autofill:pt-6 focus:border-gray-500 focus:pb-2 focus:pt-6 disabled:pointer-events-none disabled:opacity-50 [&:not(:placeholder-shown)]:pb-2 [&:not(:placeholder-shown)]:pt-6"
+									placeholder=""
+								/>
+								<button
+									id="unhidePassword"
+									class="!absolute right-1 top-2.5 z-50 select-none rounded py-2 px-4 text-center align-middle font-sans text-sm font-bold uppercase text-gray-500 transition-all hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+									type="button"
+								>
+									<span class="hidden"><i class="fas fa-eye"></i></span>
+									<span><i class="fas fa-eye-slash"></i></span>
+								</button>
+								<label
+									id="passwordLabel"
+									class="pointer-events-none absolute start-0 top-0 h-full truncate border text-gray-500 border-transparent p-4 text-sm transition duration-100 ease-in-out peer-focus:-translate-y-3 peer-focus:text-[11px] peer-focus:text-gray-500 peer-disabled:pointer-events-none peer-disabled:opacity-50 peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500"
+									>Password</label
+								>
+								<div id="passwordText" class="mt-2 text-error-main text-xs ml-3"></div>
+							</div>
+							<div class="hidden ml-3 pt-3" id="passwordStrengthContainer">
+								<div id="passwordStrength" class="h-2 w-1/4 rounded-full"></div>
+								<div class="text-white text-xs ml-2 -mt-1" id="passwordStrengthLabel"></div>
+							</div>
+							<div class="items-center pt-3 ml-1">
+								<label class="flex ml-2 text-sm font-medium text-gray-900 cursor-pointer">
+									<input
+										id="termsAndConditionsCheckbox"
+										checked
+										type="checkbox"
+										value=""
+										class="bg-gray-100 border-gray-300 rounded"
+									/>
+									<p class="ml-2 text-sm text-center text-gray-200">
+										Agree with
+										<span id="termsAndConditionsBtn" href="#" rel="noopener noreferrer" class="underline"
+											>Terms & Conditions</span
+										>
+									</p></label
+								>
+							</div>
+						</div>
+					</div>
+
+					<button id="registerButton" type="button" class="outlined-button !w-full h-10 text-sm">
+						<span>Sign Up</span>
+					</button>
+				</div>
+
+				<div class="flex items-center w-full my-4">
+					<hr class="w-full border-divider-main" />
+				</div>
+
+				<p class="text-sm text-center text-gray-200">
+					<a href="/login" rel="noopener noreferrer" class="hover:underline">Already have an account?</a>
+				</p>
+			</div>
+		</div>
+		<div id="snackbar"></div>
+	</body>
+	<script type="module" src="/static/js/auth/register.js"></script>
+	<script type="module" src="/static/js/auth/social_authentication.js"></script>
+</html>
+
+{% include "others/t&c_modal.html" %}

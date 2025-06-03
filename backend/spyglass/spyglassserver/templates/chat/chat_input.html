@@ -1,0 +1,67 @@
+<!-- Chat Input Section -->
+<div class="border-t border-divider-main bg-background-default p-4">
+    <div class="max-w-4xl mx-auto">
+        <form id="chat-form" class="flex items-end gap-4">
+            <div class="flex-grow relative">
+                <textarea
+                    id="chat-input"
+                    class="w-full resize-none rounded-lg bg-background-paper border border-divider-main px-4 py-3 text-text-light focus:outline-none focus:border-secondary-main"
+                    rows="1"
+                    placeholder="Ask about the research paper..."
+                    style="min-height: 50px; max-height: 200px;"
+                ></textarea>
+                
+                <!-- Action buttons positioned absolutely -->
+                <div class="absolute right-3 bottom-3 flex items-center space-x-2">
+                    <button type="button" class="text-text-dark hover:text-secondary-main" title="Upload file">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button type="button" class="text-text-dark hover:text-secondary-main" title="Add code">
+                        <i class="fas fa-code"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button 
+                type="submit"
+                class="bg-secondary-main hover:bg-secondary-dark text-text-contrast rounded-lg px-6 py-3 flex items-center gap-2"
+            >
+                <span>Send</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Auto-resize textarea
+    $('#chat-input').on('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    // Handle form submission
+    $('#chat-form').submit(function(e) {
+        e.preventDefault();
+        const message = $('#chat-input').val().trim();
+        if (message) {
+            // Add message to chat
+            const messageHtml = `
+                <div class="flex justify-end mb-4">
+                    <div class="bg-secondary-main text-text-contrast rounded-lg px-4 py-2 max-w-[80%]">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            $('#chat-container').append(messageHtml);
+            
+            // Clear input
+            $('#chat-input').val('').trigger('input');
+            
+            // Scroll to bottom
+            $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight);
+        }
+    });
+});
+</script>

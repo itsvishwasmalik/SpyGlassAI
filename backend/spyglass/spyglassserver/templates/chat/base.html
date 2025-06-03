@@ -1,0 +1,478 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} Import tailwind CDN  {% endcomment %}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: {
+                            default: "var(--color-background-default)",
+                            paper: "var(--color-background-paper)",
+                            contrast: "var(--color-background-contrast)",
+                            dust: "var(--color-background-dust)",
+                        },
+                        text: {
+                            light: "var(--color-text-light)",
+                            dark: "var(--color-text-dark)",
+                            body: "var(--color-text-body)",
+                            disabled: "var(--color-text-disabled)",
+                            contrast: "var(--color-text-contrast)",
+                        },
+                        primary: {
+                            main: "var(--color-primary-main)",
+                            light: "var(--color-primary-light)",
+                            dark: "var(--color-primary-dark)",
+                            contrast: "var(--color-primary-contrast)",
+                        },
+                        secondary: {
+                            main: "var(--color-secondary-main)",
+                            light: "var(--color-secondary-light)",
+                            dark: "var(--color-secondary-dark)",
+                            contrast: "var(--color-secondary-contrast)",
+                        },
+                        contrast: {
+                            main: "var(--color-contrast-main)",
+                        },
+                        error: {
+                            main: "var(--color-error-main)",
+                            light: "var(--color-error-light)",
+                            dark: "var(--color-error-dark)",
+                            contrast: "var(--color-error-contrast)",
+                        },
+                        warning: {
+                            main: "var(--color-warning-main)",
+                            light: "var(--color-warning-light)",
+                            dark: "var(--color-warning-dark)",
+                            contrast: "var(--color-warning-contrast)",
+                        },
+                        success: {
+                            main: "var(--color-success-main)",
+                            light: "var(--color-success-light)",
+                            dark: "var(--color-success-dark)",
+                            contrast: "var(--color-success-contrast)",
+                        },
+                        info: {
+                            main: "var(--color-info-main)",
+                            light: "var(--color-info-light)",
+                            dark: "var(--color-info-dark)",
+                            contrast: "var(--color-info-contrast)",
+                        },
+                        neutral: {
+                            main: "var(--color-neutral-main)",
+                            light: "var(--color-neutral-light)",
+                            dark: "var(--color-neutral-dark)",
+                            contrast: "var(--color-neutral-contrast)",
+                        },
+                        divider: {
+                            main: "var(--color-divider-main)",
+                            light: "var(--color-divider-light)",
+                            dark: "var(--color-divider-default)",
+                            body: "var(--color-divider-body)",
+                        },
+                        scrollbar: {
+                            thumb: "var(--color-scrollbar-thumb)",
+                            track: "var(--color-scrollbar-track)",
+                        },
+                        dropdown: {
+                            select: "var(--color-dropdown-select)",
+                            hover: "var(--color-dropdown-hover)",
+                        },
+                        skeleton: {
+                            light: "var(--color-skeleton-light)",
+                            dark: "var(--color-skeleton-dark)",
+                        },
+                        toggle: {
+                            background: "var(--color-toggle-background)",
+                        },
+                        select: "var(--color-select)",
+                        hover: "var(--color-hover)",
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <style type="text/tailwindcss">
+        :root {
+            --color-error-main: #ef4444;
+            --color-error-light: #fee2e2;
+            --color-error-dark: #991b1b;
+            --color-error-contrast: #fff;
+            --color-warning-main: #f59e0b;
+            --color-warning-light: #fef3c7;
+            --color-warning-dark: #92400e;
+            --color-warning-contrast: rgba(0, 0, 0, 0.87);
+            --color-success-main: #22c55e;
+            --color-success-light: #dcfce7;
+            --color-success-dark: #166534;
+            --color-success-contrast: rgba(0, 0, 0, 0.87);
+            --color-info-main: #29b6f6;
+            --color-info-light: #4fc3f7;
+            --color-info-dark: #0288d1;
+            --color-neutral-main: #4b5563;
+            --color-neutral-light: #9ca3af;
+            --color-neutral-dark: #1f2937;
+            --color-info-contrast: rgba(0, 0, 0, 0.87);
+            --color-neutral-main: #4b5563;
+            --color-neutral-light: #9ca3af;
+            --color-neutral-dark: #1f2937;
+            --color-neutral-contrast: rgba(0, 0, 0, 0.87);
+            --color-select: #ffc106;
+            --color-hover: #3b82f6;
+        }
+        
+        [data-theme="light"] {
+            --color-background-default: #f2f1f1;
+            --color-background-dust: #ffffff;
+            --color-background-paper: #ffffff;
+            --color-background-code: #fffffe;
+            --color-background-contrast: #212946;
+            --color-primary-main: #212946;
+            --color-primary-light: #93c5fd;
+            --color-primary-dark: #111936;
+            --color-primary-contrast: #fff;
+            --color-secondary-main: #333399;
+            --color-secondary-light: #93c5fd;
+            --color-secondary-dark: #ca8a04;
+            --color-secondary-contrast: rgb(161, 161, 161);
+            --color-text-light: rgb(116, 115, 115);
+            --color-text-dark: #808080;
+            --color-text-body: rgb(102, 102, 102);
+            --color-text-contrast: #fff;
+            --color-text-disabled: #9ca3af;
+            --color-divider-main: #334155;
+            --color-divider-light: rgb(220, 220, 250);
+            --color-divider-dark: #c1c1c1;
+            --color-divider-body: #d1d5db;
+            --color-scrollbar-thumb: #cbd5e1;
+            --color-scrollbar-track: #f2f1f1;
+            --color-skeleton-light: #d1d5db;
+            --color-skeleton-dark: #e5e7eb;
+            --color-toggle-background: #e5e7eb;
+            --rgb-secondary-main: 51, 51, 153;
+            --color-common-header: #333399;
+            --color-check-icon: #427242;
+        }
+        
+        [data-theme="dark"] {
+            --color-background-default: #212946;
+            --color-background-paper: #111936;
+            --color-background-dust: #1a223f;
+            --color-background-code: #1e1e1e;
+            --color-background-contrast: #f2f1f1;
+            --color-primary-main: #212946;
+            --color-primary-light: #2c2c87;
+            --color-primary-dark: #111936;
+            --color-primary-contrast: #fff;
+            --color-secondary-main: #ffc106;
+            --color-secondary-light: #fff3c7;
+            --color-secondary-dark: #ca8a04;
+            --color-secondary-contrast: rgb(161, 161, 161);
+            --color-text-light: white;
+            --color-text-dark: #ccc;
+            --color-text-body: white;
+            --color-text-contrast: #343434;
+            --color-text-disabled: #9ca3af;
+            --color-divider-main: #334155;
+            --color-divider-light: #808080;
+            --color-divider-dark: black;
+            --color-divider-body: #4b5563;
+            --color-scrollbar-thumb: #475569;
+            --color-scrollbar-track: #212946;
+            --color-skeleton-light: #4b5563;
+            --color-skeleton-dark: #374151;
+            --color-toggle-background: #374151;
+            --rgb-secondary-main: 255, 193, 6;
+            --color-common-header: #f5d025;
+            --color-check-icon: #00ff00;
+        }
+
+
+        @tailwind base;
+
+        @layer base {
+
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type="checkbox"] {
+                @apply accent-secondary-main;
+            }
+
+            input[type="radio"] {
+                @apply accent-secondary-main;
+            }
+
+            ::selection {
+                @apply bg-secondary-main text-text-contrast;
+            }
+
+            ::-webkit-scrollbar {
+                width: 5px;
+                height: 5px;
+                @apply z-[1];
+            }
+
+            ::-webkit-scrollbar-track {
+                @apply bg-inherit z-[1];
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 50px;
+                @apply bg-scrollbar-thumb z-[1];
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #9e9e9e;
+                @apply z-[1];
+            }
+
+            ::-webkit-input-placeholder {
+                @apply text-text-disabled;
+            }
+        }
+
+        @import '/static/libraries/speed_trial_form/highcharts/highcharts@11.1.0.css';
+
+        /* JQuery UI */
+        .ui-widget-content {
+            @apply !bg-background-default !border-none shadow-md ;
+        }
+        .ui-autocomplete {
+            .ui-menu-item {
+                @apply text-text-body;
+            }
+        
+            .ui-state-active {
+                @apply bg-secondary-main text-text-contrast;
+            }
+            .ui-menu-item-wrapper {
+                @apply bg-background-default text-text-body;
+            }
+            .ui-menu-item-wrapper.ui-state-focus {
+                @apply bg-hover text-white border-none;
+            }
+            @apply overflow-x-hidden overflow-y-auto max-h-72 p-0 m-0 !outline-none rounded-md !border !border-divider-body focus:border-gray-500 text-text-dark !z-[999999];
+        }
+
+        /* HighCharts */
+        .highcharts-title {
+            fill: var(--color-text-dark) !important;
+            color: var(--color-text-dark) !important;
+        }
+
+        .highcharts-background {
+            fill: transparent !important;
+        }
+
+        .highcharts-subtitle {
+            color: var(--color-text-light) !important;
+            fill: var(--color-text-light) !important;
+        }
+
+        .highcharts-axis-labels>text {
+            fill: var(--color-text-dark) !important;
+            color: var(--color-text-dark) !important;
+        }
+
+        .highcharts-xaxis-labels {
+            fill: var(--color-text-body) !important;
+        }
+
+        .highcharts-axis-title {
+            fill: var(--color-text-body) !important;
+        }
+
+        .highcharts-axis-line,
+        .highcharts-tick {
+            stroke: var(--color-divider-light) !important;
+        }
+
+        .highcharts-legend-item>text {
+            fill: var(--color-text-body) !important;
+            color: var(--color-text-body) !important;
+        }
+
+        .highcharts-axis>text {
+            color: var(--color-text-dark) !important;
+            fill: var(--color-text-dark) !important;
+        }
+
+        .highcharts-grid-line {
+            stroke: var(--color-text-dark) !important;
+        }
+
+        .tempus-dominus-widget {
+            .toolbar div {
+                @apply hover:!bg-hover hover:!text-white;
+            }
+            .time-container {
+                .time-container-clock div:not(.no-highlight) {
+                    @apply hover:!bg-hover hover:!text-white;
+                }
+                .time-container-hour .hour:hover,
+                .time-container-minute .minute:hover,
+                .time-container-second .second:hover {
+                    @apply !bg-hover !text-white;
+                }
+            }
+            .date-container {
+                .old,
+                .new,
+                .date-container-days .dow {
+                    @apply !text-gray-500;
+                }
+                .date-container-days .day:hover,
+                .date-container-days .day.active,
+                .date-container-months .month:hover,
+                .date-container-months .month.active,
+                .date-container-years .year:hover,
+                .date-container-years .year.active,
+                .date-container-decades .decade:hover,
+                .date-container-decades .decade.active {
+                    @apply !bg-hover !text-white;
+                }
+            }
+            @apply !bg-background-default !text-text-light !mt-2.5 p-1;
+        }
+
+        @tailwind components;
+        @tailwind utilities;
+
+        /* input:disabled {
+            background-color: #9ca0af78;
+            opacity: 0.8;
+            font-weight: 1000;
+            color: var(--color-common-header);
+        } */
+
+        .common-th {
+            @apply px-2 py-1 text-center border-b-2;
+        }
+        .common-td {
+            @apply px-2 py-1 text-center;
+        }
+        .common-div {
+            @apply bg-background-paper space-y-5 shadow-md rounded-md p-6 w-11/12 mt-8 relative overflow-x-auto text-xs;
+        }
+        .common-select {
+            @apply bg-background-default p-3 border border-gray-300 rounded-lg shadow-sm text-xs;
+        }
+        .common-textarea {
+            @apply bg-background-default mx-4 p-2.5 w-[54%] text-sm rounded-lg border border-gray-300;
+        }
+        .common-header {
+            color: var(--color-common-header);
+        }
+        .enable-legand {
+            color: var(--color-background-default);
+        }
+        .check-icon {
+            font-size:12px; cursor: pointer;
+            color: var(--color-check-icon);
+        }
+        .times-icon{
+            font-size:12px; cursor: pointer; color:red;
+        }
+        .border-heading{
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid var(--color-common-header);
+            line-height: 0.1em;
+            {% comment %} margin: 10px 0 20px; {% endcomment %}
+            font-size: 14px;
+        }
+        .border-heading span {
+            background:var(--color-background-paper);
+            font-weight:700;
+        }
+    </style>
+
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: var(--color-background-paper);
+            box-shadow: var(--color-divider-light);
+            color: var(--color-text-body);
+            text-align: center;
+            border: 1px solid var(--color-secondary-main);
+            border-radius: 20px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 60px;
+            font-size: 17px;
+        }
+        
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+    </style>
+    
+    <title>SpyGlassAI</title>
+</head>
+
+<body data-theme="dark">
+    <button id="theme-light-icon" type="button" title="Theme"
+        class="hidden text-text-dark hover:bg-secondary-main border border-secondary-main hover:text-text-contrast focus:outline-none rounded-md text-sm w-12 h-12 aspect-square z-10 absolute top-8 right-8">
+        <i class="fa fa-moon"></i>
+    </button>
+    <button id="theme-dark-icon" type="button" title="Theme"
+        class="text-text-dark hover:bg-secondary-main border border-secondary-main hover:text-text-contrast focus:outline-none rounded-md text-sm w-12 h-12 aspect-square z-10 absolute top-8 right-8">
+        <i class="fa fa-sun"></i>
+    </button>
+
+    <div class="flex h-screen w-full bg-background-default">
+        <!-- Left Sidebar -->
+        <div class="flex-none w-80 border-r border-divider-main">
+            {% include "chat/left_sidebar.html" %}
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex flex-col flex-grow overflow-hidden">
+            <div class="flex-grow overflow-y-auto p-4" id="chat-container">
+                <!-- Welcome Message -->
+                <div class="flex flex-col items-center justify-center h-full text-center">
+                    <h1 class="text-4xl font-bold text-secondary-main mb-4">Welcome to SpyGlass AI</h1>
+                    <p class="text-text-light">Select a paper from the left sidebar or add a new one to begin.</p>
+                </div>
+            </div>
+            
+            <!-- Chat Input -->
+            <div class="flex-none">
+                {% include "chat/chat_input.html" %}
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="flex-none w-96 border-l border-divider-main">
+            {% include "chat/right_sidebar.html" %}
+        </div>
+    </div>
+</body>
+
+<script>
+    document.getElementById('theme-light-icon').addEventListener('click', function () {
+        document.documentElement.setAttribute('data-theme', 'light');
+    });
+
+    document.getElementById('theme-dark-icon').addEventListener('click', function () {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    });
+</script>

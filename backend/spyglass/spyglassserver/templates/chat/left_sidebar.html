@@ -1,0 +1,40 @@
+<!-- Recent Papers Section -->
+<div class="flex flex-col h-full bg-background-default">
+    <div class="flex-none p-4 border-b border-divider-main">
+        <h2 class="text-xl font-semibold text-secondary-main">Recent Papers</h2>
+    </div>
+    
+    <div class="flex-grow overflow-y-auto p-4">
+        <!-- Paper List -->
+        <div class="space-y-4">
+            <!-- Individual Paper Item -->
+            <div class="p-3 rounded-lg bg-background-paper hover:bg-background-dust cursor-pointer border border-divider-main">
+                <h3 class="font-medium text-text-light">Machine Learning-Based Erosion</h3>
+                <p class="text-sm text-text-dark mt-1">Silicon Carbide Reinforced Polymer Composites</p>
+                <div class="flex justify-between items-center mt-2 text-xs text-text-dark">
+                    <span>DOI: 10.1007/s12633-020-00497-z</span>
+                    <span>01/04/2021</span>
+                </div>
+            </div>
+            
+            <!-- Add more paper items here -->
+        </div>
+    </div>
+
+    <!-- New Paper Button -->
+    <div class="flex-none p-4 border-t border-divider-main">
+        <button class="w-full py-2 px-4 bg-secondary-main text-text-contrast rounded-lg hover:bg-secondary-dark flex items-center justify-center gap-2">
+            <i class="fas fa-plus"></i>
+            <span>New Paper</span>
+        </button>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Handle paper click
+    $('.paper-item').click(function() {
+        // Handle paper selection
+    });
+});
+</script>
