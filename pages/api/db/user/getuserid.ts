@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 async function getuserid(email: string) {
   try {
     const user = await prisma.user.findUnique({
-      cacheStrategy: { ttl: 3_600 }, 
+      // cacheStrategy: { ttl: 3_600 }, 
       where: {
         email: email, 
       },

@@ -70,37 +70,40 @@ const UploadFileCard = () => {
     if (acceptedFiles[0] && session && session.user) {
       try {
         // console.log(user.fileLimit, files.length);
-        if (user.fileLimit && files.length + 1 > user.fileLimit) {
-          setMessage({
-            text: "You have reached the limit",
-            open: true,
-            type: "error",
-          });
-          setTimeout(() => {
-            setMessage({ text: "", open: false, type: "" });
-          }, 2000);
-          setLoading(false);
-            setCard({
-              name: "",
-              shown: false,
-              folderId: null,
-              filekey: null,
-              newName: null,
-              fileType: null,
-              sharedfiledelete: false,
-            });
-          return;
-        }
+        console.log("acceptedFiles: ", acceptedFiles[0]);
+        console.log("user: ", user);
+        // if (user.fileLimit && files.length + 1 > user.fileLimit) {
+        //   console.log("file limit reached")
+        //   setMessage({
+        //     text: "You have reached the limit",
+        //     open: true,
+        //     type: "error",
+        //   });
+        //   setTimeout(() => {
+        //     setMessage({ text: "", open: false, type: "" });
+        //   }, 2000);
+        //   setLoading(false);
+        //     setCard({
+        //       name: "",
+        //       shown: false,
+        //       folderId: null,
+        //       filekey: null,
+        //       newName: null,
+        //       fileType: null,
+        //       sharedfiledelete: false,
+        //     });
+        //   return;
+        // }
         const filekey = generateFileKey();
         let { data } = await axios.post("/api/aws/s3/upload-file", {
           file_key: filekey,
           type: acceptedFiles[0].type,
         });
-        // console.log("data: ", data);
+        console.log("data: ", data);
         await axios
           .put(data.url, acceptedFiles[0])
           .then((res) => {
-            // console.log(res);
+            console.log(res);
           });
         await axios
           .post("/api/db/file/createfile", {
@@ -108,10 +111,10 @@ const UploadFileCard = () => {
             fileName: acceptedFiles[0].name,
             fileType: acceptedFiles[0].type,
             filekey: filekey,
-            owner: user.name,
+            owner: user.email,
           })
           .then((res) => {
-            // console.log("files: ", res.data.files);
+            console.log("files: ", res.data.files);
             setUpdation(!updation);
             setLoading(false);
             setCard({

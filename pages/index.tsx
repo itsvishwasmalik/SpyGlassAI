@@ -43,6 +43,7 @@ import {
   mainFolderState,
   updationState,
   messageState,
+  selectedFileState
 } from "@/utils/app/state";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -594,6 +595,8 @@ const Home: React.FC<HomeProps> = ({
   const updation = useRecoilValue(updationState);
   const [message, setMessage] = useRecoilState(messageState);
   const router = useRouter();
+  const [paperDetails, setPaperDetails] = useState<any>(undefined);
+  const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
 
   // GET ALL FOLDERS IN CURRENT FOLDER
   async function getFolders() {
@@ -759,6 +762,74 @@ const Home: React.FC<HomeProps> = ({
     }
   }, [updation, directory]);
 
+  // Pick a static json file from the public folder
+  // const getPaperDetails = () => {
+  //   const jsonData = require('../public/json/temp.json');
+  //   const paperDetails = jsonData.research_paper_details;
+  //   return paperDetails;
+  // }
+
+  const getUploadedPDFURL = () => {
+    const pdfURL =
+      "https://cloudstashtusharpuri.s3.ap-south-1.amazonaws.com/c037eedf979750053d2138bf3b2467d60ae5abd2b7c062423586eaa6d5be1140?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT54FE5RDOC644BWP%2F20250414%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20250414T201825Z&X-Amz-Expires=3600&X-Amz-Signature=ec87438da4161172f509d62edb673ade1b3aba36d8cdd5cc5805ca45a4cccd75&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dkumar2016.pdf";
+    return pdfURL;
+  };
+
+  const getUploadedPDFURL_ = async (file:any) => {
+    try {
+      const filekey = file.sharekey === "" ? file.filekey : file.sharekey;
+      const response = await axios.post("/api/aws/s3/download-file", {
+        file_key: filekey,
+        type: file.type,
+        file_name: file.name,
+      });
+      return response.data.url;
+    } catch (error:any) {
+      console.error("Error fetching PDF URL:", error.message);
+      return null;
+    }
+  };
+
+
+  
+  // getUploadedPDFURL_(selectedFile).then((url) => {
+  //   console.log("Selected FIle : ", selectedFile);
+  //   if (url) {
+  //     console.log("PDF URL:", url);
+  //   } else {
+  //     console.log("Failed to get PDF URL");
+  //   }
+  // });
+
+  useEffect(() => {
+    const getPaperDetailsViaAPI = async () => {
+      try {
+        const pdfURL = await getUploadedPDFURL_(selectedFile); // Assuming getUploadedPDFURL is async
+        const selectedFileName = selectedFile?.name;
+        console.log("pdfURL: inside", pdfURL);
+        console.log("selectedFileName:  inside ", selectedFileName);
+        if (!pdfURL || !selectedFileName) {
+          console.error("Missing PDF URL or file name");
+          return;
+        }
+  
+        const response = await axios.get(
+          `http://localhost:8000/api/get_research_paper_details/?pdf_url=${encodeURIComponent(pdfURL)}&filename=${encodeURIComponent(selectedFileName)}`
+        );
+        const paperDetails = response.data.research_paper_details;
+        console.log("Paper details:", paperDetails);
+        setPaperDetails(paperDetails);
+      } catch (error) {
+        console.error("Error fetching paper details:", error);
+      }
+    };
+  
+    if (selectedFile?.name) {
+      getPaperDetailsViaAPI();
+    }
+  }, [selectedFile?.name]);
+
+
   return (
     <>
       <Head>
@@ -848,12 +919,14 @@ const Home: React.FC<HomeProps> = ({
 
             {showPromptbar ? (
               <div>
-                <Promptbar
+                {paperDetails && <Promptbar
                   prompts={prompts}
+                  // paper={getPaperDetails()}
+                  paper={paperDetails}
                   onCreatePrompt={handleCreatePrompt}
                   onUpdatePrompt={handleUpdatePrompt}
                   onDeletePrompt={handleDeletePrompt}
-                />
+                />}
                 <button
                   className="fixed top-5 right-[270px] z-50 h-7 w-7 hover:text-gray-400 dark:text-white dark:hover:text-gray-300 sm:top-0.5 sm:right-[270px] sm:h-8 sm:w-8 sm:text-neutral-700"
                   onClick={handleTogglePromptbar}

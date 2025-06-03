@@ -52,9 +52,14 @@ def extract_metadata_and_doi(pdf_path: str):
 # print("base dir is ==========> ", settings.BASE_DIR)
 # print("pyth dir is ==========> ", settings.PYTH_DIR)
 
-info = extract_metadata_and_doi(pdf_path)
-print(f"Title:          {info['title']}")
-print(f"Author:         {info['author']}")
-print(f"Subject:        {info['subject']}")
-print(f"Creation Date:  {info['creation_date']}")
-print(f"DOI:            {info['doi']}")
+# info = extract_metadata_and_doi(pdf_path)
+# print(f"Title:          {info['title']}")
+# print(f"Author:         {info['author']}")
+# print(f"Subject:        {info['subject']}")
+# print(f"Creation Date:  {info['creation_date']}")
+# print(f"DOI:            {info['doi']}")
+
+
+def get_doi_from_pdf(pdf_path):
+    info = extract_metadata_and_doi(pdf_path)
+    return info['doi']
