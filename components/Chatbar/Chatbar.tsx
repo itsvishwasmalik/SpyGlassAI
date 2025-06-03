@@ -1,13 +1,9 @@
 /* eslint-disable react/jsx-key */
 import { Conversation } from '@/types/chat';
-import { KeyValuePair } from '@/types/data';
-import { SupportedExportFormats } from '@/types/export';
-import { IconFolderPlus, IconMessagesOff, IconPlus } from '@tabler/icons-react';
+import { IconPlus } from '@tabler/icons-react';
 import { useTranslation } from 'next-i18next';
 import { FC, useEffect, useState } from 'react';
 import { Search } from '../Sidebar/Search';
-import { ChatbarSettings } from './ChatbarSettings';
-import { Conversations } from './Conversations';
 import { File, Folder as Directory, Tree } from '../ui/file-tree';
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { cardState, directoryState, selectedFileState } from "@/utils/app/state";
@@ -53,19 +49,6 @@ interface Props {
   loading: boolean;
   conversations: Conversation[];
   selectedConversation: Conversation;
-  apiKey: string;
-  onNewConversation: () => void;
-  onToggleLightMode: (mode: 'light' | 'dark') => void;
-  onSelectConversation: (conversation: Conversation) => void;
-  onDeleteConversation: (conversation: Conversation) => void;
-  onUpdateConversation: (
-    conversation: Conversation,
-    data: KeyValuePair,
-  ) => void;
-  onApiKeyChange: (apiKey: string) => void;
-  onClearConversations: () => void;
-  onExportConversations: () => void;
-  onImportConversations: (data: SupportedExportFormats) => void;
 }
 
 export const Chatbar: FC<Props> = ({
@@ -74,15 +57,6 @@ export const Chatbar: FC<Props> = ({
   loading,
   conversations,
   selectedConversation,
-  apiKey,
-  onNewConversation,
-  onSelectConversation,
-  onDeleteConversation,
-  onUpdateConversation,
-  onApiKeyChange,
-  onClearConversations,
-  onExportConversations,
-  onImportConversations,
 }) => {
   const { t } = useTranslation('sidebar');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -91,96 +65,6 @@ export const Chatbar: FC<Props> = ({
   const { data: session, status } = useSession();
   const [directory, setDirectory] = useRecoilState(directoryState);
   const [selectedFile, setSelectedFile] = useRecoilState(selectedFileState);
-
-  const handleUpdateConversation = (
-    conversation: Conversation,
-    data: KeyValuePair,
-  ) => {
-    onUpdateConversation(conversation, data);
-    setSearchTerm('');
-  };
-
-  const handleDeleteConversation = (conversation: Conversation) => {
-    onDeleteConversation(conversation);
-    setSearchTerm('');
-  };
-
-  const handleDrop = (e: any) => {
-    if (e.dataTransfer) {
-      const conversation = JSON.parse(e.dataTransfer.getData('conversation'));
-      onUpdateConversation(conversation, { key: 'folderId', value: 0 });
-
-      e.target.style.background = 'none';
-    }
-  };
-
-  const allowDrop = (e: any) => {
-    e.preventDefault();
-  };
-
-  const highlightDrop = (e: any) => {
-    e.target.style.background = '#343541';
-  };
-
-  const removeHighlight = (e: any) => {
-    e.target.style.background = 'none';
-  };
-
-  // const ELEMENTS = [
-  //   {
-  //     id: "1",
-  //     isSelectable: true,
-  //     name: "src",
-  //     children: [
-  //       {
-  //         id: "2",
-  //         isSelectable: true,
-  //         name: "app",
-  //         children: [
-  //           {
-  //             id: "3",
-  //             isSelectable: true,
-  //             name: "layout.tsx",
-  //           },
-  //           {
-  //             id: "4",
-  //             isSelectable: true,
-  //             name: "page.tsx",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: "5",
-  //         isSelectable: true,
-  //         name: "components",
-  //         children: [
-  //           {
-  //             id: "6",
-  //             isSelectable: true,
-  //             name: "header.tsx",
-  //           },
-  //           {
-  //             id: "7",
-  //             isSelectable: true,
-  //             name: "footer.tsx",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: "8",
-  //         isSelectable: true,
-  //         name: "lib",
-  //         children: [
-  //           {
-  //             id: "9",
-  //             isSelectable: true,
-  //             name: "utils.ts",
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ];
   
 
   useEffect(() => {
@@ -407,15 +291,6 @@ export const Chatbar: FC<Props> = ({
           </Tree>
         </div>}
       </div>
-
-      <ChatbarSettings
-        apiKey={apiKey}
-        conversationsCount={conversations.length}
-        onApiKeyChange={onApiKeyChange}
-        onClearConversations={onClearConversations}
-        onExportConversations={onExportConversations}
-        onImportConversations={onImportConversations}
-      />
     </div>
   );
 };

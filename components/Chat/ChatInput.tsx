@@ -1,6 +1,4 @@
 import { Message } from '@/types/chat';
-import { OpenAIModel } from '@/types/openai';
-import { Prompt } from '@/types/prompt';
 import {
   IconBolt,
   IconBrandGoogle,
@@ -18,26 +16,21 @@ import {
   useRef,
   useState,
 } from 'react';
-import { PluginSelect } from './PluginSelect';
-import { PromptList } from './PromptList';
-import { VariableModal } from './VariableModal';
 
 interface Props {
   messageIsStreaming: boolean;
-  model: OpenAIModel;
   conversationIsEmpty: boolean;
-  prompts: Prompt[];
-  onSend: (message: Message, plugin: Plugin | null) => void;
+  prompts?: any[];
+  onSend: (message: Message, plugin?: any) => void;
   onRegenerate: () => void;
-  stopConversationRef: MutableRefObject<boolean>;
+  stopConversationRef?: MutableRefObject<boolean>;
   textareaRef: MutableRefObject<HTMLTextAreaElement | null>;
 }
 
 export const ChatInput: FC<Props> = ({
   messageIsStreaming,
-  model,
   conversationIsEmpty,
-  prompts,
+  prompts = [],
   onSend,
   onRegenerate,
   stopConversationRef,
@@ -47,23 +40,10 @@ export const ChatInput: FC<Props> = ({
 
   const [content, setContent] = useState<string>();
   const [isTyping, setIsTyping] = useState<boolean>(false);
-  const [showPromptList, setShowPromptList] = useState(false);
-  const [activePromptIndex, setActivePromptIndex] = useState(0);
-  const [promptInputValue, setPromptInputValue] = useState('');
-  const [variables, setVariables] = useState<string[]>([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [showPluginSelect, setShowPluginSelect] = useState(false);
-  const [plugin, setPlugin] = useState<Plugin | null>(null);
-
-  const promptListRef = useRef<HTMLUListElement | null>(null);
-
-  const filteredPrompts = prompts.filter((prompt) =>
-    prompt.name.toLowerCase().includes(promptInputValue.toLowerCase()),
-  );
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    const maxLength = model.maxLength;
+    const maxLength = 1200;
 
     if (value.length > maxLength) {
       alert(
@@ -76,7 +56,6 @@ export const ChatInput: FC<Props> = ({
     }
 
     setContent(value);
-    updatePromptListVisibility(value);
   };
 
   const handleSend = () => {
@@ -89,9 +68,8 @@ export const ChatInput: FC<Props> = ({
       return;
     }
 
-    onSend({ role: 'user', content }, plugin);
+    onSend({ role: 'user', content }, null);
     setContent('');
-    setPlugin(null);
 
     if (window.innerWidth < 640 && textareaRef && textareaRef.current) {
       textareaRef.current.blur();
@@ -99,10 +77,14 @@ export const ChatInput: FC<Props> = ({
   };
 
   const handleStopConversation = () => {
-    stopConversationRef.current = true;
-    setTimeout(() => {
-      stopConversationRef.current = false;
-    }, 1000);
+    if (stopConversationRef) {
+      stopConversationRef.current = true;
+      setTimeout(() => {
+        if (stopConversationRef) {
+          stopConversationRef.current = false;
+        }
+      }, 1000);
+    }
   };
 
   const isMobile = () => {
@@ -113,113 +95,12 @@ export const ChatInput: FC<Props> = ({
     return mobileRegex.test(userAgent);
   };
 
-  const handleInitModal = () => {
-    const selectedPrompt = filteredPrompts[activePromptIndex];
-    if (selectedPrompt) {
-      setContent((prevContent) => {
-        const newContent = prevContent?.replace(
-          /\/\w*$/,
-          selectedPrompt.content,
-        );
-        return newContent;
-      });
-      handlePromptSelect(selectedPrompt);
-    }
-    setShowPromptList(false);
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (showPromptList) {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        setActivePromptIndex((prevIndex) =>
-          prevIndex < prompts.length - 1 ? prevIndex + 1 : prevIndex,
-        );
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        setActivePromptIndex((prevIndex) =>
-          prevIndex > 0 ? prevIndex - 1 : prevIndex,
-        );
-      } else if (e.key === 'Tab') {
-        e.preventDefault();
-        setActivePromptIndex((prevIndex) =>
-          prevIndex < prompts.length - 1 ? prevIndex + 1 : 0,
-        );
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        handleInitModal();
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        setShowPromptList(false);
-      } else {
-        setActivePromptIndex(0);
-      }
-    } else if (e.key === 'Enter' && !isTyping && !isMobile() && !e.shiftKey) {
+    if (e.key === 'Enter' && !isTyping && !isMobile() && !e.shiftKey) {
       e.preventDefault();
       handleSend();
-    } else if (e.key === '/' && e.metaKey) {
-      e.preventDefault();
-      setShowPluginSelect(!showPluginSelect);
     }
   };
-
-  const parseVariables = (content: string) => {
-    const regex = /{{(.*?)}}/g;
-    const foundVariables = [];
-    let match;
-
-    while ((match = regex.exec(content)) !== null) {
-      foundVariables.push(match[1]);
-    }
-
-    return foundVariables;
-  };
-
-  const updatePromptListVisibility = useCallback((text: string) => {
-    const match = text.match(/\/\w*$/);
-
-    if (match) {
-      setShowPromptList(true);
-      setPromptInputValue(match[0].slice(1));
-    } else {
-      setShowPromptList(false);
-      setPromptInputValue('');
-    }
-  }, []);
-
-  const handlePromptSelect = (prompt: Prompt) => {
-    const parsedVariables = parseVariables(prompt.content);
-    setVariables(parsedVariables);
-
-    if (parsedVariables.length > 0) {
-      setIsModalVisible(true);
-    } else {
-      setContent((prevContent) => {
-        const updatedContent = prevContent?.replace(/\/\w*$/, prompt.content);
-        return updatedContent;
-      });
-      updatePromptListVisibility(prompt.content);
-    }
-  };
-
-  const handleSubmit = (updatedVariables: string[]) => {
-    const newContent = content?.replace(/{{(.*?)}}/g, (match, variable) => {
-      const index = variables.indexOf(variable);
-      return updatedVariables[index];
-    });
-
-    setContent(newContent);
-
-    if (textareaRef && textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  };
-
-  useEffect(() => {
-    if (promptListRef.current) {
-      promptListRef.current.scrollTop = activePromptIndex * 30;
-    }
-  }, [activePromptIndex]);
 
   useEffect(() => {
     if (textareaRef && textareaRef.current) {
@@ -229,24 +110,7 @@ export const ChatInput: FC<Props> = ({
         textareaRef?.current?.scrollHeight > 400 ? 'auto' : 'hidden'
       }`;
     }
-  }, [content]);
-
-  useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (
-        promptListRef.current &&
-        !promptListRef.current.contains(e.target as Node)
-      ) {
-        setShowPromptList(false);
-      }
-    };
-
-    window.addEventListener('click', handleOutsideClick);
-
-    return () => {
-      window.removeEventListener('click', handleOutsideClick);
-    };
-  }, []);
+  }, [content, textareaRef]);
 
   return (
     <div className="absolute bottom-0 left-0 w-full border-transparent bg-[#1e1e1e] md:pt-2">
@@ -270,7 +134,6 @@ export const ChatInput: FC<Props> = ({
         )}
 
         <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] sm:mx-4">
-
           <textarea
             ref={textareaRef}
             className="m-0 w-full resize-none border-0 bg-transparent px-4 py-2 text-black md:py-3"
@@ -285,7 +148,7 @@ export const ChatInput: FC<Props> = ({
               }`,
             }}
             placeholder={
-              t('Type a message or type "/" to select a prompt...') || ''
+              t('Type a message...') || ''
             }
             value={content}
             rows={1}
@@ -305,42 +168,7 @@ export const ChatInput: FC<Props> = ({
               <IconSend size={18} />
             )}
           </button>
-
-          {showPromptList && filteredPrompts.length > 0 && (
-            <div className="absolute bottom-12 w-full">
-              <PromptList
-                activePromptIndex={activePromptIndex}
-                prompts={filteredPrompts}
-                onSelect={handleInitModal}
-                onMouseOver={setActivePromptIndex}
-                promptListRef={promptListRef}
-              />
-            </div>
-          )}
-
-          {isModalVisible && (
-            <VariableModal
-              prompt={prompts[activePromptIndex]}
-              variables={variables}
-              onSubmit={handleSubmit}
-              onClose={() => setIsModalVisible(false)}
-            />
-          )}
         </div>
-      </div>
-      <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-black/50 md:px-4 md:pt-3 md:pb-6">
-        <a
-          href="https://github.com/mckaywrigley/chatbot-ui"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          ChatBot UI
-        </a>
-        .{' '}
-        {t(
-          "Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
-        )}
       </div>
     </div>
   );

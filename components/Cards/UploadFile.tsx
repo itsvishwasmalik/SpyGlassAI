@@ -146,7 +146,7 @@ const UploadFileCard = () => {
         {!isDragReject && ( acceptedFiles.length === 0 ? (
           <div>
             <p className="md:text-xl text-sm font-medium text-white ">
-              Drag 'n' drop your file here
+              Drag n drop your file here
             </p>
             <p className="text-[#CCD0CF] text-sm">or click here</p>
           </div> ) : (

@@ -15,11 +15,11 @@ function App({ Component, pageProps }: AppProps<CustomPageProps>) {
   return (
     <SessionProvider session={pageProps.session}>
       <RecoilRoot>
-    <div className={inter.className}>
-      <Toaster />
-      <Component {...pageProps} />
-    </div>
-    </RecoilRoot>
+        <div className={inter.className}>
+          <Toaster />
+          <Component {...pageProps} />
+        </div>
+      </RecoilRoot>
     </SessionProvider>
   );
 }

@@ -8,6 +8,8 @@ from django.conf import settings
 import os
 import requests
 import json
+from django.utils import timezone
+import uuid
 
 @api_view(["GET"])
 def sayHello(request):
@@ -56,7 +58,84 @@ def get_research_paper_details(request):
     if research_paper_details:
         return JsonResponse({"research_paper_details": research_paper_details})
     else:
-        return JsonResponse({"error": "Research paper not found."})        
-    
-    
-    
+        return JsonResponse({"error": "Research paper not found."})
+
+
+@api_view(["POST"])
+def send_message(request):
+    """
+    Temporary endpoint to handle chat messages
+    """
+    try:
+        message = request.data.get('message')
+        conversation_id = request.data.get('conversation_id')
+        
+        # For now, just echo back a response
+        response = {
+            'message': f"Echo: {message}",
+            'conversation_id': conversation_id,
+            'timestamp': str(timezone.now())
+        }
+        
+        return JsonResponse(response)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["POST"])
+def create_conversation(request):
+    """
+    Create a new conversation
+    """
+    try:
+        name = request.data.get('name', 'New Conversation')
+        user_id = request.data.get('user_id')
+        
+        # For now, just return a mock conversation object
+        conversation = {
+            'id': str(uuid.uuid4()),
+            'name': name,
+            'user_id': user_id,
+            'created_at': str(timezone.now()),
+            'messages': []
+        }
+        
+        return JsonResponse(conversation)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+def get_conversations(request):
+    """
+    Get all conversations for a user
+    """
+    try:
+        user_id = request.GET.get('user_id')
+        
+        # For now, return mock conversations
+        conversations = [
+            {
+                'id': str(uuid.uuid4()),
+                'name': 'Sample Conversation 1',
+                'user_id': user_id,
+                'created_at': str(timezone.now()),
+                'messages': []
+            }
+        ]
+        
+        return JsonResponse({'conversations': conversations})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["DELETE"])
+def delete_conversation(request, conversation_id):
+    """
+    Delete a conversation
+    """
+    try:
+        # For now, just return success
+        return JsonResponse({'success': True, 'message': f'Conversation {conversation_id} deleted'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+

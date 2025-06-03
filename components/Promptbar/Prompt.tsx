@@ -1,4 +1,4 @@
-import { Prompt } from '@/types/prompt';
+
 import {
   IconBulbFilled,
   IconCheck,
@@ -8,17 +8,8 @@ import {
 import { DragEvent, FC, useEffect, useState } from 'react';
 import { PromptModal } from './PromptModal';
 
-interface Props {
-  prompt: Prompt;
-  onUpdatePrompt: (prompt: Prompt) => void;
-  onDeletePrompt: (prompt: Prompt) => void;
-}
 
-export const PromptComponent: FC<Props> = ({
-  prompt,
-  onUpdatePrompt,
-  onDeletePrompt,
-}) => {
+export const PromptComponent: FC<Props> = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRenaming, setIsRenaming] = useState(false);
