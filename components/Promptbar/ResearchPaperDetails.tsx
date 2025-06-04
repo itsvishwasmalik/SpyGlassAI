@@ -58,9 +58,13 @@ interface ResearchPaperDetailsProps {
 export const ResearchPaperDetails: FC<ResearchPaperDetailsProps> = ({ details }) => {
     return (
         <div className="bg-[#202123] flex justify-between flex-col h-full w-full text-white p-4 rounded-md shadow-lg space-y-4">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col items-center gap-2">
                 {/* Optional icon */}
-                <IconBook size={24} />
+                <IconBook 
+                    size={24} 
+                    className='text-blue-500 mb-2'
+                    aria-label="Research Paper Icon"
+                />
                 <h2 className="text-xl font-bold">{details.title}</h2>
             </div>
 

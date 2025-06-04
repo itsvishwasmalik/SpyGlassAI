@@ -10,7 +10,7 @@ import {
 import { DragEvent, FC, KeyboardEvent, useEffect, useState } from 'react';
 
 interface Props {
-  selectedConversation: Conversation;
+  selectedConversation: Conversation | undefined ;
   conversation: Conversation;
   loading: boolean;
   onSelectConversation: (conversation: Conversation) => void;
@@ -34,7 +34,7 @@ export const ConversationComponent: FC<Props> = ({
   const [renameValue, setRenameValue] = useState('');
 
   const handleEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && selectedConversation) {
       e.preventDefault();
       handleRename(selectedConversation);
     }
@@ -67,7 +67,7 @@ export const ConversationComponent: FC<Props> = ({
 
   return (
     <div className="relative flex items-center">
-      {isRenaming && selectedConversation.id === conversation.id ? (
+      {isRenaming && selectedConversation?.id === conversation.id ? (
         <div className="flex w-full items-center gap-3 bg-[#343541]/90 p-3 rounded-lg">
           <IconMessage size={18} />
           <input
@@ -84,7 +84,7 @@ export const ConversationComponent: FC<Props> = ({
           className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#343541]/90 ${
             loading ? 'disabled:cursor-not-allowed' : ''
           } ${
-            selectedConversation.id === conversation.id ? 'bg-[#343541]/90' : ''
+            selectedConversation?.id === conversation.id ? 'bg-[#343541]/90' : ''
           }`}
           onClick={() => onSelectConversation(conversation)}
           disabled={loading}
@@ -94,7 +94,7 @@ export const ConversationComponent: FC<Props> = ({
           <IconMessage size={18} />
           <div
             className={`relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 ${
-              selectedConversation.id === conversation.id ? 'pr-12' : 'pr-1'
+              selectedConversation?.id === conversation.id ? 'pr-12' : 'pr-1'
             }`}
           >
             {conversation.name}
@@ -103,7 +103,7 @@ export const ConversationComponent: FC<Props> = ({
       )}
 
       {(isDeleting || isRenaming) &&
-        selectedConversation.id === conversation.id && (
+        selectedConversation?.id === conversation.id && (
           <div className="absolute right-1 z-10 flex text-gray-300">
             <button
               className="min-w-[20px] p-1 text-neutral-400 hover:text-neutral-100"
@@ -133,7 +133,7 @@ export const ConversationComponent: FC<Props> = ({
           </div>
         )}
 
-      {selectedConversation.id === conversation.id &&
+      {selectedConversation?.id === conversation.id &&
         !isDeleting &&
         !isRenaming && (
           <div className="absolute right-1 z-10 flex text-gray-300">

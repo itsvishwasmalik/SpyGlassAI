@@ -24,7 +24,6 @@ import { VariableModal } from './VariableModal';
 
 interface Props {
   messageIsStreaming: boolean;
-  model: OpenAIModel;
   conversationIsEmpty: boolean;
   prompts: Prompt[];
   onSend: (message: Message, plugin: Plugin | null) => void;
@@ -35,7 +34,6 @@ interface Props {
 
 export const ChatInput: FC<Props> = ({
   messageIsStreaming,
-  model,
   conversationIsEmpty,
   prompts,
   onSend,
@@ -63,7 +61,7 @@ export const ChatInput: FC<Props> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    const maxLength = model.maxLength;
+    const maxLength = 1200; // Set your desired max length here
 
     if (value.length > maxLength) {
       alert(
@@ -273,7 +271,7 @@ export const ChatInput: FC<Props> = ({
 
           <textarea
             ref={textareaRef}
-            className="m-0 w-full resize-none border-0 bg-transparent px-4 py-2 text-black md:py-3"
+            className="m-0 w-full resize-none border-0 bg-[#303030] px-4 py-2 text-white md:py-3 focus:ring-0 focus:outline-none border-transparent"
             style={{
               resize: 'none',
               bottom: `${textareaRef?.current?.scrollHeight}px`,
@@ -328,7 +326,7 @@ export const ChatInput: FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-black/50 md:px-4 md:pt-3 md:pb-6">
+      <div className="px-3 pt-2 pb-3 text-center text-[12px] text-gray/50 dark:text-black/50 md:px-4 md:pt-3 md:pb-6">
         <a
           href="https://github.com/mckaywrigley/chatbot-ui"
           target="_blank"

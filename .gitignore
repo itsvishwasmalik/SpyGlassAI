@@ -45,3 +45,4 @@ backend/spyglass/spyglassserver/scopus
 *.pyc
 
 backend/spyglass/Data
+backend/spyglass/model_cache

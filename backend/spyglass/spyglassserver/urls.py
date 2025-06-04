@@ -29,4 +29,5 @@ urlpatterns = [
     ),
     path('api/hello/', views_api.sayHello),
     path('api/get_research_paper_details/', views_api.get_research_paper_details),
+    path('api/generate_query_response/', views_api.generate_query_response),
 ]

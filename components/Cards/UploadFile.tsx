@@ -4,8 +4,6 @@ import {
   directoryState,
   userState,
   updationState,
-  messageState,
-  fileState,
 } from "@/utils/app/state";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
@@ -63,8 +61,6 @@ const UploadFileCard = () => {
   const [updation, setUpdation] = useRecoilState(updationState);
   const setCard = useSetRecoilState(cardState);
   const { data: session } = useSession();
-  const setMessage = useSetRecoilState(messageState);
-  const files = useRecoilValue(fileState);
 
   async function uploadFile() {
     if (acceptedFiles[0] && session && session.user) {
