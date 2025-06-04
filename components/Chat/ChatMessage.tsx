@@ -1,5 +1,5 @@
 import { Message } from '@/types/chat';
-import { IconCheck, IconCopy, IconEdit, IconUser, IconRobot } from '@tabler/icons-react';
+import { IconCheck, IconCopy, IconEdit, IconRobot } from '@tabler/icons-react';
 import { useTranslation } from 'next-i18next';
 import { FC, memo, useEffect, useRef, useState } from 'react';
 import rehypeMathjax from 'rehype-mathjax';
@@ -39,7 +39,7 @@ export const ChatMessage: FC<Props> = memo(
     };
 
     const handleEditMessage = () => {
-      if (message.content != messageContent) {
+      if (message.content !== messageContent) {
         onEditMessage({ ...message, content: messageContent }, messageIndex);
       }
       setIsEditing(false);
@@ -70,30 +70,57 @@ export const ChatMessage: FC<Props> = memo(
       }
     }, [isEditing]);
 
-    return (
-      <div
-        className={`group ${
-          message.role === 'assistant'
-            ? 'border-b border-gray-900/50 bg-[#444654]'
-            : 'border-b border-gray-900/50 bg-[#343541] flex justify-end'
-        }`}
-        style={{ overflowWrap: 'anywhere' }}
-      >
-        <div className={`relative flex gap-4 p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl ${
-          message.role === 'assistant' ? 'm-auto' : ''
-        }`}>
-          <div className="min-w-[30px]">
-            {message.role === 'assistant' ? <IconRobot size={30} className="text-gray-300"/> : <IconUser size={30} className="text-gray-300"/>}
-          </div>
+    //
+    // Determine bubble‐style classes:
+    //
+    const isAssistant = message.role === 'assistant';
+    const bubbleBase =
+      'max-w-[80%] whitespace-pre-wrap break-words text-base md:text-lg leading-snug';
+    const assistantClasses = [
+      'self-start',
+      'bg-[#444654]',
+      'text-gray-100',
+      'rounded-xl',
+      'p-4',
+      'my-2',
+      'shadow-sm',
+    ].join(' ');
+    const userClasses = [
+      'self-end',
+      'bg-[#1F2937]', // slightly lighter than page bg
+      'text-gray-200',
+      'rounded-xl',
+      'p-4',
+      'my-2',
+      'shadow-sm',
+    ].join(' ');
 
-          <div className="prose mt-[-2px] w-full text-gray-100">
+    return (
+      <div className="flex flex-col group">
+        <div
+          className={`${bubbleBase} ${
+            isAssistant ? assistantClasses : userClasses
+          } flex flex-col relative`}
+        >
+          {/* 
+            ChatGPT only shows the bot icon on assistant messages.
+            We completely hide the user icon for user messages.
+          */}
+          {isAssistant && (
+            <div className="absolute -left-10 top-2">
+              {/* Replace this with your own ChatGPT‐style bot SVG if desired */}
+              <IconRobot size={28} className="text-gray-300" />
+            </div>
+          )}
+
+          <div className="flex flex-col">
             {message.role === 'user' ? (
-              <div className="flex w-full">
+              <>
                 {isEditing ? (
-                  <div className="flex w-full flex-col">
+                  <div className="flex flex-col">
                     <textarea
                       ref={textareaRef}
-                      className="w-full resize-none whitespace-pre-wrap border-none bg-[#343541] text-gray-100"
+                      className="w-full resize-none bg-transparent text-inherit focus:outline-none"
                       value={messageContent}
                       onChange={handleInputChange}
                       onKeyDown={handlePressEnter}
@@ -108,17 +135,16 @@ export const ChatMessage: FC<Props> = memo(
                         overflow: 'hidden',
                       }}
                     />
-
-                    <div className="mt-10 flex justify-center space-x-4">
+                    <div className="mt-4 flex justify-end space-x-2">
                       <button
-                        className="h-[40px] rounded-md bg-blue-500 px-4 py-1 text-sm font-medium text-gray-100 enabled:hover:bg-blue-600 disabled:opacity-50"
+                        className="h-8 rounded-md bg-blue-600 px-3 py-1 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
                         onClick={handleEditMessage}
                         disabled={messageContent.trim().length <= 0}
                       >
-                        {t('Save & Submit')}
+                        {t('Save')}
                       </button>
                       <button
-                        className="h-[40px] rounded-md border border-gray-600 px-4 py-1 text-sm font-medium text-gray-300 hover:bg-gray-800"
+                        className="h-8 rounded-md border border-gray-500 px-3 py-1 text-sm text-gray-300 hover:bg-gray-700"
                         onClick={() => {
                           setMessageContent(message.content);
                           setIsEditing(false);
@@ -129,48 +155,21 @@ export const ChatMessage: FC<Props> = memo(
                     </div>
                   </div>
                 ) : (
-                  <div className="prose whitespace-pre-wrap text-gray-100">
-                    {message.content}
-                  </div>
+                  <div className="prose prose-invert">{message.content}</div>
                 )}
 
-                {(window.innerWidth < 640 || !isEditing) && (
+                {/* Edit icon */}
+                {!isEditing && (
                   <button
-                    className={`absolute translate-x-[1000px] text-gray-400 hover:text-gray-300 focus:translate-x-0 group-hover:translate-x-0 ${
-                      window.innerWidth < 640
-                        ? 'right-3 bottom-1'
-                        : 'right-0 top-[26px]'
-                    }`}
                     onClick={toggleEditing}
+                    className="absolute top-2 right-2 text-gray-400 opacity-0 group-hover:opacity-100 hover:text-gray-200 transition-opacity"
                   >
-                    <IconEdit size={20} />
+                    <IconEdit size={18} />
                   </button>
                 )}
-              </div>
+              </>
             ) : (
               <>
-                <div
-                  className={`absolute ${
-                    window.innerWidth < 640
-                      ? 'right-3 bottom-1'
-                      : 'right-0 top-[26px] m-0'
-                  }`}
-                >
-                  {messagedCopied ? (
-                    <IconCheck
-                      size={20}
-                      className="text-green-400"
-                    />
-                  ) : (
-                    <button
-                      className="translate-x-[1000px] text-gray-400 hover:text-gray-300 focus:translate-x-0 group-hover:translate-x-0"
-                      onClick={copyOnClick}
-                    >
-                      <IconCopy size={20} />
-                    </button>
-                  )}
-                </div>
-
                 <MemoizedReactMarkdown
                   className="prose prose-invert"
                   remarkPlugins={[remarkGfm, remarkMath]}
@@ -178,7 +177,6 @@ export const ChatMessage: FC<Props> = memo(
                   components={{
                     code({ node, inline, className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || '');
-
                       return !inline && match ? (
                         <CodeBlock
                           key={Math.random()}
@@ -217,6 +215,20 @@ export const ChatMessage: FC<Props> = memo(
                 >
                   {message.content}
                 </MemoizedReactMarkdown>
+
+                {/* Copy icon */}
+                <div className="absolute top-2 right-2 flex items-center">
+                  {messagedCopied ? (
+                    <IconCheck size={18} className="text-green-400" />
+                  ) : (
+                    <button
+                      onClick={copyOnClick}
+                      className="text-gray-400 opacity-0 group-hover:opacity-100 hover:text-gray-200 transition-opacity"
+                    >
+                      <IconCopy size={18} />
+                    </button>
+                  )}
+                </div>
               </>
             )}
           </div>

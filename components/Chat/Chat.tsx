@@ -136,7 +136,7 @@ export const Chat: FC<Props> = memo(
     }, [messagesEndRef]);
 
     return (
-      <div className="relative flex-1 overflow-hidden bg-[#1e1e1e]">
+      <div className="relative flex-1 px-10 overflow-hidden bg-[#1e1e1e]">
           <>
             <div
               className="max-h-full overflow-x-hidden"

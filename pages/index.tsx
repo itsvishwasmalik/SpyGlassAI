@@ -121,8 +121,9 @@ const Home = () => {
 
         const data = await response.json();
 
-        // Assume Django returns { response: '...' }
-        const assistantMessage: Message = { role: 'assistant', content: data.response };
+        // Handle response from Django backend
+        const answer = data.answer || data.response;
+        const assistantMessage: Message = { role: 'assistant', content: answer };
         const newMessages = [...updatedConversation.messages, assistantMessage];
         const newConversation = { ...updatedConversation, messages: newMessages };
 
